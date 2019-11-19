@@ -21,16 +21,20 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import io.eberlein.apyide.CodeStyles;
 import io.eberlein.apyide.Project;
+import io.eberlein.apyide.ProjectRunConfiguration;
 import io.eberlein.apyide.R;
 import io.eberlein.apyide.Termux;
 import io.eberlein.apyide.Utils;
 
 public class EditSourceFragment extends Fragment {
 
+    private Project project;
+
     @BindView(R.id.et_source) EditText source;
 
     @OnClick(R.id.btn_run)
     void btnRunClicked(){
+
         List<String> args = new ArrayList<>();
         args.add("main.py"); // todo make variable
         // todo add extra arguments
@@ -41,8 +45,6 @@ public class EditSourceFragment extends Fragment {
     void sourceCodeChanged(){
 
     }
-
-    private Project project;
 
     public EditSourceFragment(Project project){
         this.project = project;

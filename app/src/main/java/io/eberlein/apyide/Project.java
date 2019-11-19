@@ -3,6 +3,9 @@ package io.eberlein.apyide;
 import android.util.Log;
 
 import java.io.File;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +14,13 @@ public class Project {
     private File path;
     private List<File> files;
 
+    private ProjectRunConfiguration prc;
+
     public Project(File path) {
         this.path = path;
         this.files = new ArrayList<>();
         load(path);
+        loadRunConfig(path);
     }
 
     private void load(File directory){
@@ -27,6 +33,11 @@ public class Project {
                 files.add(f);
             }
         }
+    }
+
+    private void loadRunConfig(File path){
+        // todo
+
     }
 
     public Long getLastModified() {
