@@ -3,8 +3,6 @@ package io.eberlein.apyide;
 import android.graphics.Color;
 import android.widget.EditText;
 
-import com.jmpergar.awesometext.AwesomeTextHandler;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +39,13 @@ public class LanguageStyle {
         return name;
     }
 
+    public void compile(String s){
+
+    }
+
     public void compile(EditText et){
-        AwesomeTextHandler ath = new AwesomeTextHandler();
+        String txt = et.getText().toString();
+        /*
         for(String p : ORANGE) ath.addViewSpanRenderer(p, new CodeStyle(p, Colors.ORANGE, false));
         for(String p : WHITE) ath.addViewSpanRenderer(p, new CodeStyle(p, Colors.WHITE, false));
         for(String p : YELLOW) ath.addViewSpanRenderer(p, new CodeStyle(p, Colors.YELLOW, false));
@@ -50,6 +53,7 @@ public class LanguageStyle {
         for(String p : GREEN) ath.addViewSpanRenderer(p, new CodeStyle(p, Colors.GREEN, false));
         for(String p : PURPLE) ath.addViewSpanRenderer(p, new CodeStyle(p, Colors.PURPLE, false));
         ath.setView(et);
+         */
     }
 }
 

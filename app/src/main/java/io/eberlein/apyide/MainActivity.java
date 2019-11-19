@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e){
             Toast.makeText(this, "termux not installed", Toast.LENGTH_LONG).show();
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse("http://build.eberlein.io:8080/job/termux/lastSuccessfulBuild/artifact/app/build/outputs/apk/release/app-release.apk")); // todo
+            i.setData(Uri.parse("http://build.eberlein.io:8080/job/termux/lastSuccessfulBuild/artifact/app/build/outputs/apk/release/app-release.apk"));
             startActivity(i);
         }
     }

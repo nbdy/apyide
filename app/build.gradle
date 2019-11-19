@@ -45,7 +45,4 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.1.71.android'
 
     implementation "com.google.guava:guava:28.1-android"
-
-    implementation "com.jmpergar:AwesomeText:1.0.0"
-
 }
