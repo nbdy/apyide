@@ -22,9 +22,12 @@ public class NewProjectFragment extends Fragment {
 
     @OnClick(R.id.btn_create_project)
     void btnCreateProjectClicked(){
-        if(Utils.createProject(getContext(), projectName.getText().toString())) {
+        Project u = Utils.getCreateProject(getContext(), projectName.getText().toString());
+        if(u != null) {
+            Utils.replaceFragment(R.id.nav_host_fragment,this, new EditSourceFragment(u));
             // todo attach to navbar
-            // open editfragment on main.py
+        } else {
+            Toast.makeText(getContext(), "can not open / create '" + projectName.getText().toString() + "'", Toast.LENGTH_LONG).show();
         }
     }
 

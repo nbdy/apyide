@@ -3,15 +3,13 @@ package io.eberlein.apyide;
 import android.util.Log;
 
 import java.io.File;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Project {
     private Long lastModified = 0L;
     private File path;
+    private String name;
     private List<File> files;
 
     private ProjectRunConfiguration prc;
@@ -19,6 +17,7 @@ public class Project {
     public Project(File path) {
         this.path = path;
         this.files = new ArrayList<>();
+        name = path.getName();
         load(path);
         loadRunConfig(path);
     }
@@ -61,5 +60,10 @@ public class Project {
 
     public List<File> getFiles() {
         return files;
+    }
+
+    public void delete(){
+        if(!path.delete()) Log.e("Project.delete;" + name, "could not delete project directory");
+        else Log.d("Project.delete;" + name, "deleted directory");
     }
 }

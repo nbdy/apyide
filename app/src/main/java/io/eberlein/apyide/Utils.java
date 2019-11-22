@@ -54,19 +54,19 @@ public class Utils {
         return cs;
     }
 
-    private static File getAPyIDEPath(Context ctx){
+    public static File getAPyIDEPath(Context ctx){
         return new File(getPreferences(ctx).getString(KEY_SETTINGS_PATH, Environment.getExternalStorageDirectory().getPath() + "/apyide/"));
     }
 
-    private static File getAPyIDEProjectsPath(Context ctx){
+    public static File getAPyIDEProjectsPath(Context ctx){
         return new File(getAPyIDEPath(ctx).getPath() + PATH_PROJECTS);
     }
 
-    private static File getAPyIDECodestylesPath(Context ctx){
+    public static File getAPyIDECodestylesPath(Context ctx){
         return new File(getAPyIDEPath(ctx) + PATH_STYLES);
     }
 
-    private static File getAPyIDEProjectPath(Context ctx, String name){
+    public static File getAPyIDEProjectPath(Context ctx, String name){
         return new File(getAPyIDEProjectsPath(ctx).getPath() + "/" + name);
     }
 
@@ -110,6 +110,12 @@ public class Utils {
 
             return true;
         }
+    }
+
+    public static Project getCreateProject(Context ctx, String name) {
+        File f = Utils.getAPyIDEProjectPath(ctx, name);
+        if (f.exists()) return new Project(f);
+        return null;
     }
 
     public static Projects getProjects(Context ctx){

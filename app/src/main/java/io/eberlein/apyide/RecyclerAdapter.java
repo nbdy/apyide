@@ -1,9 +1,11 @@
 package io.eberlein.apyide;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 import io.eberlein.apyide.ui.EditSourceFragment;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -23,20 +26,43 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private Fragment currentFragment;
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_left_up) TextView left_up;
-        @BindView(R.id.tv_left_center) TextView left_center;
-        @BindView(R.id.tv_left_down) TextView left_down;
-        @BindView(R.id.tv_right_up) TextView right_up;
-        @BindView(R.id.tv_right_center) TextView right_center;
-        @BindView(R.id.tv_right_down) TextView right_down;
+        Context ctx;
+
+        @BindView(R.id.tv_left_up) TextView tv_left_up;
+        @BindView(R.id.tv_left_center) TextView tv_left_center;
+        @BindView(R.id.tv_left_down) TextView tv_left_down;
+        @BindView(R.id.tv_right_up) TextView tv_right_up;
+        @BindView(R.id.tv_right_center) TextView tv_right_center;
+        @BindView(R.id.tv_right_down) TextView tv_right_down;
+
+        @BindView(R.id.btn_right) Button btn_right;
 
         @OnClick
         void onClick(View v){
             Utils.replaceFragment(R.id.nav_host_fragment, currentFragment, new EditSourceFragment(projects.getProject(getAdapterPosition())));
         }
 
+        @OnLongClick
+        void onLongClick(View v){
+            tv_right_up.setText("");
+            tv_right_center.setText("");
+            tv_right_down.setText("");
+            Project p = new Project(Utils.getAPyIDEProjectPath(v.getContext(), tv_left_up.getText().toString()));
+            btn_right.setEnabled(true);
+            btn_right.setText("delete");
+            btn_right.setBackgroundColor(Color.parseColor("#f54242"));
+            btn_right.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    p.delete();
+                    projects.remove(p.getName());
+                }
+            });
+        }
+
         ViewHolder(View v){
             super(v);
+            ctx = v.getContext();
             ButterKnife.bind(this, v);
         }
     }
@@ -61,10 +87,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
         Project p = projects.getProject(position);
-        holder.left_center.setText(p.getPath().getName());
-        holder.left_center.setTextSize(16);
-        holder.right_down.setText(p.getPath().getAbsolutePath());
-        holder.right_up.setText(new Date(p.getLastModified()).toString());
+        holder.tv_left_center.setText(p.getPath().getName());
+        holder.tv_left_center.setTextSize(16);
+        holder.tv_right_down.setText(p.getPath().getAbsolutePath());
+        holder.tv_right_up.setText(new Date(p.getLastModified()).toString());
+
     }
 
     @Override

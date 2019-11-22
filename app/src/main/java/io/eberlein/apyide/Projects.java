@@ -58,4 +58,10 @@ public class Projects {
     public List<Project> getProjects() {
         return projects;
     }
+
+    void remove(String name){
+        for(int i=0; i<projects.size(); i++){
+            if(projects.get(i).getName().equals(name)) projects.remove(i);
+        }
+    }
 }

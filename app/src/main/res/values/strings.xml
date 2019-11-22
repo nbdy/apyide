@@ -16,4 +16,5 @@
     <string name="create">create</string>
     <string name="project_name">project name</string>
     <string name="projects">projects</string>
+    <string name="delete">delete</string>
 </resources>
