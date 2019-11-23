@@ -21,7 +21,6 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import io.eberlein.apyide.CodeStyles;
 import io.eberlein.apyide.Project;
-import io.eberlein.apyide.ProjectRunConfiguration;
 import io.eberlein.apyide.R;
 import io.eberlein.apyide.Termux;
 import io.eberlein.apyide.Utils;
@@ -36,7 +35,7 @@ public class EditSourceFragment extends Fragment {
     void btnRunClicked(){
 
         List<String> args = new ArrayList<>();
-        args.add("main.py"); // todo make variable
+        args.add(project.getMain(getContext()).getPath()); // todo make variable
         // todo add extra arguments
         Termux.run(getContext(), "python3", (String[]) args.toArray());
     }

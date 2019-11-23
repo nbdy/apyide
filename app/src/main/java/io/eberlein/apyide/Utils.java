@@ -115,7 +115,8 @@ public class Utils {
     public static Project getCreateProject(Context ctx, String name) {
         File f = Utils.getAPyIDEProjectPath(ctx, name);
         if (f.exists()) return new Project(f);
-        return null;
+        else if(!createProject(ctx, name)) return null;
+        return new Project(f);
     }
 
     public static Projects getProjects(Context ctx){

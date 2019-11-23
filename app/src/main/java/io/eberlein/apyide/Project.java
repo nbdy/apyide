@@ -1,5 +1,6 @@
 package io.eberlein.apyide;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.io.File;
@@ -22,7 +23,7 @@ public class Project {
         loadRunConfig(path);
     }
 
-    private void load(File directory){
+    public void load(File directory){
         Log.d("Project.load", directory.getPath());
         for(File f : directory.listFiles()){
             if(f.lastModified() > lastModified) lastModified = f.lastModified();
@@ -45,6 +46,10 @@ public class Project {
 
     public String getName(){
         return path.getName();
+    }
+
+    public File getMain(Context ctx){
+        return Utils.getAPyIDEProjectPath(ctx, path.getName() + "/" + path.getName() + ".py");
     }
 
     public File getPath() {
