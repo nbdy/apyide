@@ -25,6 +25,7 @@
         android:layout_below="@id/tv_project_name"
         android:layout_alignStart="@id/tv_project_name"
         android:layout_marginEnd="8dp"
+        android:theme="@style/DefaultEditTextTheme"
         android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

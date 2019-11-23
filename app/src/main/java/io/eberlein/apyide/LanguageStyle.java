@@ -3,36 +3,58 @@ package io.eberlein.apyide;
 import android.graphics.Color;
 import android.widget.EditText;
 
+import com.jaychang.st.SimpleText;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-class Colors {
-    public static final int ORANGE = Color.rgb(240, 143, 58);
-    public static final int WHITE = Color.WHITE;
-    public static final int YELLOW = Color.YELLOW;
-    public static final int BLUE = Color.BLUE;
-    public static final int GREEN = Color.GREEN;
-    public static final int PURPLE = Color.rgb(77, 27, 128);
+
+class CodeColor {
+    private int color;
+    private List<String> words;
+
+    CodeColor(){
+        color = R.color.white;
+        words = new ArrayList<>();
+    }
+
+    CodeColor(int color){
+        this.color = color;
+        words = new ArrayList<>();
+    }
+
+    CodeColor(int color, List<String> words){
+        this.color = color;
+        this.words = words;
+    }
+
+    void addWord(String word){
+        if(!words.contains(word)) words.add(word);
+    }
+
+    void removeWord(String word){
+        words.remove(word);
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public List<String> getWords() {
+        return words;
+    }
 }
 
 
 public class LanguageStyle {
     protected  String name;
-    List<String> ORANGE;
-    List<String> WHITE;
-    List<String> YELLOW;
-    List<String> BLUE;
-    List<String> GREEN;
-    List<String> PURPLE;
+
+    List<CodeColor> colors;
 
     LanguageStyle(){
         name = "default";
-        ORANGE = new ArrayList<>();
-        WHITE = new ArrayList<>();
-        YELLOW = new ArrayList<>();
-        BLUE = new ArrayList<>();
-        GREEN = new ArrayList<>();
-        PURPLE = new ArrayList<>();
+        colors = new ArrayList<>();
     }
 
     public String getName() {
@@ -44,16 +66,11 @@ public class LanguageStyle {
     }
 
     public void compile(EditText et){
-        String txt = et.getText().toString();
-        /*
-        for(String p : ORANGE) ath.addViewSpanRenderer(p, new CodeStyle(p, Colors.ORANGE, false));
-        for(String p : WHITE) ath.addViewSpanRenderer(p, new CodeStyle(p, Colors.WHITE, false));
-        for(String p : YELLOW) ath.addViewSpanRenderer(p, new CodeStyle(p, Colors.YELLOW, false));
-        for(String p : BLUE) ath.addViewSpanRenderer(p, new CodeStyle(p, Colors.BLUE, false));
-        for(String p : GREEN) ath.addViewSpanRenderer(p, new CodeStyle(p, Colors.GREEN, false));
-        for(String p : PURPLE) ath.addViewSpanRenderer(p, new CodeStyle(p, Colors.PURPLE, false));
-        ath.setView(et);
-         */
+        SimpleText st = SimpleText.from(et.getText());
+        for(CodeColor c : colors){
+            for(String s : c.getWords()) st.all(s).textColor(c.getColor());
+        }
+        et.setText(st);
     }
 }
 
@@ -62,14 +79,14 @@ class PythonDarkula extends LanguageStyle {
     PythonDarkula(){
         super();
         name = "pyDarkula";
-        WHITE.add("\\w");
-        ORANGE.add("if");
-        ORANGE.add("import");
-        ORANGE.add("from");
-        YELLOW.add("\\\".*\\\"");
-        GREEN.add("'.*'");
-        PURPLE.add("print");
-        BLUE.add("\\d*");
+        colors.addAll(Arrays.asList(
+                new CodeColor(R.color.white, Arrays.asList("\\w")),
+                new CodeColor(R.color.orange, Arrays.asList("if", "import", "from")),
+                new CodeColor(R.color.yellow, Arrays.asList("\\\".*\\\"")),
+                new CodeColor(R.color.green, Arrays.asList("'.*'")),
+                new CodeColor(R.color.purple, Arrays.asList("print")),
+                new CodeColor(R.color.blue, Arrays.asList("\\d*"))
+        ));
     }
 }
 

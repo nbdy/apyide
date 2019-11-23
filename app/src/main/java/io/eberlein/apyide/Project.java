@@ -68,7 +68,9 @@ public class Project {
     }
 
     public void delete(){
-        if(!path.delete()) Log.e("Project.delete;" + name, "could not delete project directory");
-        else Log.d("Project.delete;" + name, "deleted directory");
+        String lt = "Project.delete;" + name;
+        Log.d(lt, "trying to delete '" + path.toString() + "'");
+        if(!path.delete()) Log.e(lt, "could not delete project directory");
+        else Log.d(lt, "deleted directory");
     }
 }

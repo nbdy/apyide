@@ -8,7 +8,8 @@
         android:gravity="top|start"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        style="@style/CodeEditTextTheme"
+        android:cursorVisible="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_run"
@@ -16,6 +17,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/black"
         android:src="@drawable/baseline_play_arrow_white_48"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

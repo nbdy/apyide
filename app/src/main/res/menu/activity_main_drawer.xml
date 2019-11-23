@@ -6,15 +6,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_new_project"
-            android:icon="@drawable/baseline_create_new_folder_24"
+            android:icon="@drawable/baseline_create_new_folder_white_24"
             android:title="@string/new_project"/>
         <item
             android:id="@+id/nav_open_project"
-            android:icon="@drawable/baseline_folder_open_24"
+            android:icon="@drawable/baseline_folder_open_white_24"
             android:title="@string/open_project"/>
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/baseline_settings_applications_24"
+            android:icon="@drawable/baseline_settings_applications_white_24"
             android:title="@string/settings" />
     </group>
 </menu>

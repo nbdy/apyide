@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="accent">#D81B60</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="orange">#c9592c</color>
+    <color name="yellow">#ded41d</color>
+    <color name="green">#18ad1b</color>
+    <color name="purple">#560fba</color>
+    <color name="blue">#221cd6</color>
+    <color name="grey">#424242</color>
 
-    <style name="BaseTheme" parent="AppTheme">
-        <item name="colorControlNormal">#c5c5c5</item>
-        <item name="colorControlActivated">@color/accent</item>
-        <item name="colorControlHighlight">@color/accent</item>
-    </style>
+    <color name="colorPrimary">@color/black</color>
+    <color name="colorPrimaryDark">@color/black</color>
+    <color name="accent">#FFFFFF</color>
 </resources>
