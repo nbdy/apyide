@@ -49,7 +49,9 @@ public class Project {
     }
 
     public File getMain(Context ctx){
-        return Utils.getAPyIDEProjectPath(ctx, path.getName() + "/" + path.getName() + ".py");
+        File f =  Utils.getAPyIDEProjectPath(ctx, path.getName() + "/" + path.getName() + ".py");
+        Log.d("Project.getMain;" + name, f.toString());
+        return f;
     }
 
     public File getPath() {

@@ -54,19 +54,19 @@ public class Utils {
         return cs;
     }
 
-    public static File getAPyIDEPath(Context ctx){
+    private static File getAPyIDEPath(Context ctx){
         return new File(getPreferences(ctx).getString(KEY_SETTINGS_PATH, Environment.getExternalStorageDirectory().getPath() + "/apyide/"));
     }
 
-    public static File getAPyIDEProjectsPath(Context ctx){
+    private static File getAPyIDEProjectsPath(Context ctx){
         return new File(getAPyIDEPath(ctx).getPath() + PATH_PROJECTS);
     }
 
-    public static File getAPyIDECodestylesPath(Context ctx){
+    private static File getAPyIDECodestylesPath(Context ctx){
         return new File(getAPyIDEPath(ctx) + PATH_STYLES);
     }
 
-    public static File getAPyIDEProjectPath(Context ctx, String name){
+    static File getAPyIDEProjectPath(Context ctx, String name){
         return new File(getAPyIDEProjectsPath(ctx).getPath() + "/" + name);
     }
 
@@ -84,7 +84,7 @@ public class Utils {
 
     }
 
-    public static boolean createProject(Context ctx, String name) {
+    private static boolean createProject(Context ctx, String name) {
         File p = getAPyIDEProjectPath(ctx, name);
         if (p.exists()) {
             Toast.makeText(ctx, "project '" + name + "' already exists", Toast.LENGTH_LONG).show();
@@ -94,7 +94,7 @@ public class Utils {
                 couldNotCreateToast(ctx, p.getPath());
                 return false;
             }
-            File pm = new File(p.getPath() + "/main.py");
+            File pm = new File(p.getPath() + "/" + name +".py");
             try {
                 if (!pm.createNewFile()) {
                     couldNotCreateToast(ctx, pm.getPath());
