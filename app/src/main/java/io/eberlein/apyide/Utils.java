@@ -35,7 +35,7 @@ public class Utils {
         ft.commit();
     }
 
-    private static SharedPreferences getPreferences(Context ctx){
+    static SharedPreferences getPreferences(Context ctx){
         return ctx.getSharedPreferences(KEY_SETTINGS, Context.MODE_PRIVATE);
     }
 

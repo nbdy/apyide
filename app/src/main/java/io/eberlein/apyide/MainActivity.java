@@ -1,11 +1,14 @@
 package io.eberlein.apyide;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -41,10 +44,38 @@ public class MainActivity extends AppCompatActivity {
             pm.getPackageInfo("com.termux", 0);
         } catch (PackageManager.NameNotFoundException e){
             Toast.makeText(this, "termux not installed", Toast.LENGTH_LONG).show();
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse("http://build.eberlein.io:8080/job/termux/lastSuccessfulBuild/artifact/app/build/outputs/apk/release/app-release.apk"));
-            startActivity(i);
+            askForTermuxDownload();
         }
+    }
+
+    private void askForTermuxDownload(){
+        SharedPreferences s = Utils.getPreferences(this);
+        if(s.getBoolean("askTermuxDownload", true)){
+            downloadTermux();
+        } else {
+            s.edit().putBoolean("termuxEnabled", false).apply();
+        }
+    }
+
+    private void downloadTermux(){
+        AlertDialog.Builder b = new AlertDialog.Builder(this);
+        b.setMessage("download modified version of termux?");
+        b.setTitle("download termux");
+        b.setNegativeButton("no", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        b.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("http://build.eberlein.io:8080/job/termux/lastSuccessfulBuild/artifact/app/build/outputs/apk/release/app-release.apk"));
+                startActivity(i);
+            }
+        });
+        b.create();
     }
 
     @Override
