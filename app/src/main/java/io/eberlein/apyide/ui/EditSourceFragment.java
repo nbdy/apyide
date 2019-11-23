@@ -55,7 +55,23 @@ public class EditSourceFragment extends Fragment {
         ButterKnife.bind(this, root);
         source.setText(Utils.readFile(project.getMain(getContext())));
         languageStyle = Utils.getStyles(getContext()).getStyles().get(0); // todo make choose able / get via shared preferences
-        languageStyle.compile(source);
+        source.setText(languageStyle.compile(source));
+        source.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                languageStyle.compile(s);
+            }
+        });
         return root;
     }
 

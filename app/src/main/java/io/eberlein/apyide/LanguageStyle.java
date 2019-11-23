@@ -1,9 +1,13 @@
 package io.eberlein.apyide;
 
-import android.graphics.Color;
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Typeface;
+import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
 import android.widget.EditText;
-
-import com.jaychang.st.SimpleText;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,16 +65,20 @@ public class LanguageStyle {
         return name;
     }
 
-    public void compile(String s){
-
+    public Editable compile(EditText et){
+        return compile(et.getText());
     }
 
-    public void compile(EditText et){
-        SimpleText st = SimpleText.from(et.getText());
+    public Editable compile(Editable e){
+        String t = e.toString();
         for(CodeColor c : colors){
-            for(String s : c.getWords()) st.all(s).textColor(c.getColor());
+            for(String s : c.getWords()){
+                for(int i = t.indexOf(s); i >= 0; i = t.indexOf(s, i + 1)){
+                    // e.setSpan(new BackgroundColorSpan(Resources.getSystem().getColor(c.getColor()), i, i + s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE));
+                }
+            }
         }
-        et.setText(st);
+        return e;
     }
 }
 
