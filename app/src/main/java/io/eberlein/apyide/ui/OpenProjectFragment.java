@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.eberlein.apyide.R;
-import io.eberlein.apyide.RecyclerAdapter;
+import io.eberlein.apyide.ProjectsAdapter;
 import io.eberlein.apyide.Utils;
 
 public class OpenProjectFragment extends Fragment {
@@ -29,7 +29,7 @@ public class OpenProjectFragment extends Fragment {
 
     private void populateProjects(){
         Context ctx = getContext();
-        projects.setAdapter(new RecyclerAdapter(ctx, Utils.getProjects(ctx), this));
+        projects.setAdapter(new ProjectsAdapter(ctx, Utils.getProjects(ctx), this));
         projects.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 }

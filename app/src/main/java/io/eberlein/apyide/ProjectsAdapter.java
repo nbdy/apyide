@@ -20,7 +20,7 @@ import butterknife.OnClick;
 import butterknife.OnLongClick;
 import io.eberlein.apyide.ui.EditSourceFragment;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder> {
     private Projects projects;
     private Context ctx;
     private Fragment currentFragment;
@@ -28,8 +28,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder {
         private Project project;
         private Boolean extraMenuOpen = false;
-
-        Context ctx;
 
         @BindView(R.id.tv_left_up) TextView tv_left_up;
         @BindView(R.id.tv_left_center) TextView tv_left_center;
@@ -79,7 +77,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         ViewHolder(View v){
             super(v);
-            ctx = v.getContext();
             ButterKnife.bind(this, v);
         }
 
@@ -92,12 +89,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
     }
 
-    public RecyclerAdapter(Context ctx, Fragment currentFragment){
+    public ProjectsAdapter(Context ctx, Fragment currentFragment){
         this.ctx = ctx;
         this.currentFragment = currentFragment;
     }
 
-    public RecyclerAdapter(Context ctx, Projects projects, Fragment currentFragment) {
+    public ProjectsAdapter(Context ctx, Projects projects, Fragment currentFragment) {
         this.ctx = ctx;
         this.projects = projects;
         this.currentFragment = currentFragment;
@@ -105,12 +102,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @NonNull
     @Override
-    public RecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProjectsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(ctx).inflate(R.layout.recyclerview_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProjectsAdapter.ViewHolder holder, int position) {
         holder.setProject(projects.getProject(position));
     }
 

@@ -1,14 +1,9 @@
 package io.eberlein.apyide;
 
-import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
-import android.widget.EditText;
 
 import androidx.core.content.res.ResourcesCompat;
 
@@ -48,7 +43,7 @@ class CodeColor {
         return color;
     }
 
-    public List<String> getWords() {
+    List<String> getWords() {
         return words;
     }
 }
