@@ -9,7 +9,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -22,7 +21,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.Gravity;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -36,13 +35,15 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
     @BindView(R.id.nav_view) NavigationView navigationView;
-    // @BindView(R.id.nav_) ExpandableListView projects;
 
     private void isTermuxInstalled(){
         PackageManager pm = getPackageManager();
         try{
-            pm.getPackageInfo("com.termux", 0);
+            pm.getPackageInfo(Static.TERMUX_PACKAGE, 0);
+            Log.i("MainActivity.isTermuxInstalled", "found termux");
+            requestPermissions(new String[]{Static.PERMISSION_TERMUX}, Static.PERMISSION_TERMUX_CODE);
         } catch (PackageManager.NameNotFoundException e){
+            e.printStackTrace();
             Toast.makeText(this, "termux not installed", Toast.LENGTH_LONG).show();
             askForTermuxDownload();
         }
@@ -50,11 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void askForTermuxDownload(){
         SharedPreferences s = Utils.getPreferences(this);
-        if(s.getBoolean("askTermuxDownload", true)){
-            downloadTermux();
-        } else {
-            s.edit().putBoolean("termuxEnabled", false).apply();
-        }
+        boolean askTermuxDownload = s.getBoolean(Static.ASK_TERMUX_DOWNLOAD, true);
+        Log.d("MainActivity.askForTermuxDownload", String.valueOf(askTermuxDownload));
+        if(s.getBoolean(Static.ASK_TERMUX_DOWNLOAD, true)) downloadTermux();
+        else s.edit().putBoolean(Static.ENABLE_TERMUX, false).apply();
     }
 
     private void downloadTermux(){
@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         b.setNegativeButton("no", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Utils.getPreferences(getApplicationContext()).edit().putBoolean(Static.ENABLE_TERMUX, false).apply();
+                Toast.makeText(getApplicationContext(), "executing code won't be possible", Toast.LENGTH_LONG).show();
                 dialog.dismiss();
             }
         });
@@ -75,16 +77,28 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        b.create();
+        b.create().show();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == 0){
+        String lk = "MainActivity.onRequestPermissionsResult";
+        if(requestCode == Static.PERMISSION_STORAGE_CODE){
             if(grantResults.length > 0 && grantResults[0] == 0){
+                Log.d( lk, "got storage permission");
                 Utils.createDirectoryStructure(this);
             } else {
-                Toast.makeText(this, "i need permissions to do stuff", Toast.LENGTH_LONG).show();
+                Log.d(lk, "storage permission denied");
+                Toast.makeText(this, "cannot create directory structure without permission", Toast.LENGTH_LONG).show();
+            }
+            isTermuxInstalled();
+        } else if (requestCode == Static.PERMISSION_TERMUX_CODE) {
+            if(grantResults.length > 0 && grantResults[0] == 0){
+                Log.d(lk, "got termux permission");
+                Utils.getPreferences(this).edit().putBoolean(Static.ENABLE_TERMUX, true).apply();
+            } else {
+                Log.d(lk, "termux permission denied");
+                Utils.getPreferences(this).edit().putBoolean(Static.ENABLE_TERMUX, false).apply();
             }
         }
     }
@@ -108,12 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView.setItemIconTintList(null);
 
-        isTermuxInstalled();
-
-        checkSelfPermission("com.termux.permission.TERMUX_SERVICE");
-        checkSelfPermission("android.permission.WRITE_EXTERNAL_STORAGE");
-        requestPermissions(new String[]{"com.termux.permission.TERMUX_SERVICE",
-                "android.permission.WRITE_EXTERNAL_STORAGE"}, 0);
+        requestPermissions(new String[]{Static.PERMISSION_STORAGE}, Static.PERMISSION_STORAGE_CODE);
     }
 
     @Override
