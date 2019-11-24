@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -138,5 +139,19 @@ public class Utils {
 
     public static String parseLastLog(Context ctx, String name){
         return ""; // todo
+    }
+
+    public static InputMethodManager getInputMethodManager(Context ctx){
+        return (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
+    }
+
+    public static void hideKeyboard(Context ctx){
+        InputMethodManager i = getInputMethodManager(ctx);
+        if(i != null) i.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    }
+
+    public static void showKeyboard(Context ctx){
+        InputMethodManager i = getInputMethodManager(ctx);
+        if(i != null) i.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
     }
 }

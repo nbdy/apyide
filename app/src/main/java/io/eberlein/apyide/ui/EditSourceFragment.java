@@ -67,4 +67,9 @@ public class EditSourceFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onDestroy() {
+        Utils.hideKeyboard(getContext());
+        super.onDestroy();
+    }
 }
