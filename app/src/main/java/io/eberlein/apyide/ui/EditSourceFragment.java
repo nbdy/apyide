@@ -17,7 +17,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnTextChanged;
 import io.eberlein.apyide.LanguageStyle;
 import io.eberlein.apyide.Project;
 import io.eberlein.apyide.R;
@@ -34,17 +33,10 @@ public class EditSourceFragment extends Fragment {
     void btnRunClicked(){
 
         List<String> args = new ArrayList<>();
-        args.add(project.getMain(getContext()).getPath()); // todo make variable
+        args.add(project.getMain(getContext()).getPath());
         // todo add extra arguments
         Termux.run(getContext(), "python3", (String[]) args.toArray());
     }
-
-    /*
-    @OnTextChanged(value = R.id.et_source, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void onCodeChanged(CharSequence text){
-        languageStyle.compile(source);
-    }
-    */
 
     public EditSourceFragment(Project project){
         this.project = project;
@@ -55,7 +47,7 @@ public class EditSourceFragment extends Fragment {
         ButterKnife.bind(this, root);
         source.setText(Utils.readFile(project.getMain(getContext())));
         languageStyle = Utils.getStyles(getContext()).getStyles().get(0); // todo make choose able / get via shared preferences
-        source.setText(languageStyle.compile(source));
+        source.setText(languageStyle.compile(getResources(), source.getText()));
         source.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -69,7 +61,7 @@ public class EditSourceFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                languageStyle.compile(s);
+                languageStyle.compile(getResources(), s);
             }
         });
         return root;

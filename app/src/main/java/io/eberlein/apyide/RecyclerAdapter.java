@@ -53,12 +53,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
 
         void closeExtraMenu(){
+            extraMenuOpen = false;
             tv_right_up.setText(new Date(project.getLastModified()).toString());
             tv_right_down.setText(project.getPath().toString());
             btn_right.setVisibility(View.GONE);
         }
 
         void openExtraMenu(View v){
+            extraMenuOpen = true;
             tv_right_up.setText("");
             tv_right_center.setText("");
             tv_right_down.setText("");

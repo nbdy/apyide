@@ -7,7 +7,10 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
 import android.widget.EditText;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,16 +68,15 @@ public class LanguageStyle {
         return name;
     }
 
-    public Editable compile(EditText et){
-        return compile(et.getText());
-    }
-
-    public Editable compile(Editable e){
+    public Editable compile(Resources res, Editable e){
         String t = e.toString();
         for(CodeColor c : colors){
             for(String s : c.getWords()){
                 for(int i = t.indexOf(s); i >= 0; i = t.indexOf(s, i + 1)){
-                    // e.setSpan(new BackgroundColorSpan(Resources.getSystem().getColor(c.getColor()), i, i + s.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE));
+                    e.setSpan(
+                            new ForegroundColorSpan(ResourcesCompat.getColor(res, c.getColor(), null)),
+                            i, i + s.length(),
+                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
             }
         }
@@ -88,12 +90,17 @@ class PythonDarkula extends LanguageStyle {
         super();
         name = "pyDarkula";
         colors.addAll(Arrays.asList(
-                new CodeColor(R.color.white, Arrays.asList("\\w")),
-                new CodeColor(R.color.orange, Arrays.asList("if", "import", "from")),
-                new CodeColor(R.color.yellow, Arrays.asList("\\\".*\\\"")),
-                new CodeColor(R.color.green, Arrays.asList("'.*'")),
-                new CodeColor(R.color.purple, Arrays.asList("print")),
-                new CodeColor(R.color.blue, Arrays.asList("\\d*"))
+                new CodeColor(R.color.white, Arrays.asList("")),
+                new CodeColor(R.color.orange, Arrays.asList(
+                        "def", "if", "import", "from", "class", "pass", "while", "True", "False",
+                        "for", "in", ",")),
+                new CodeColor(R.color.yellow, Arrays.asList("")),
+                new CodeColor(R.color.green, Arrays.asList("")),
+                new CodeColor(R.color.purple, Arrays.asList(
+                        "__init__", "self")),
+                new CodeColor(R.color.blue, Arrays.asList(
+                        "print", "object", "range", "isinstance", "issubclass", "list", "set",
+                        "frozenset"))
         ));
     }
 }
