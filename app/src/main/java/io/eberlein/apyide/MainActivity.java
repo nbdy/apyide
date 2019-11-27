@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse("http://build.eberlein.io:8080/job/termux/lastSuccessfulBuild/artifact/app/build/outputs/apk/release/app-release.apk"));
+                i.setData(Uri.parse(Static.TERMUX_APK_URL));
                 startActivity(i);
             }
         });
