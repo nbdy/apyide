@@ -8,27 +8,27 @@ import java.util.List;
 public class CodeStyles {
     private List<LanguageStyle> styles;
 
-    CodeStyles(){
+    public CodeStyles(){
         styles = new ArrayList<>();
     }
 
-    CodeStyles(File directory){
+    public CodeStyles(File directory){
         styles = new ArrayList<>();
         // todo
     }
 
-    void add(LanguageStyle c){
+    public void add(LanguageStyle c){
         styles.add(c);
     }
 
-    LanguageStyle get(String name){
+    public LanguageStyle get(String name){
         for(LanguageStyle s : styles){
             if(s.getName().equals(name)) return s;
         }
         return null;
     }
 
-    String[] getNames(){
+    public String[] getNames(){
         List<String> r = new ArrayList<>();
         for(LanguageStyle c : styles) r.add(c.getName());
         return (String[]) r.toArray();
@@ -36,5 +36,9 @@ public class CodeStyles {
 
     public List<LanguageStyle> getStyles() {
         return styles;
+    }
+
+    public int size(){
+        return styles.size();
     }
 }

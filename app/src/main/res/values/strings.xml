@@ -2,12 +2,6 @@
     <string name="app_name">apyide</string>
     <string name="app_name_desc">android python ide</string>
 
-    <string name="navigation_drawer_open">open navigation drawer</string>
-    <string name="navigation_drawer_close">close navigation drawer</string>
-    <string name="nav_header_title">apyide</string>
-    <string name="nav_header_subtitle">nav_header_subtitle</string>
-    <string name="nav_header_desc">nav_header_desc</string>
-
     <string name="home">home</string>
     <string name="new_project">new project</string>
     <string name="open_project">open project</string>
@@ -17,4 +11,7 @@
     <string name="project_name">project name</string>
     <string name="projects">projects</string>
     <string name="delete">delete</string>
+
+    <string name="code_styles">code styles</string>
+    <string name="code_style">code style</string>
 </resources>

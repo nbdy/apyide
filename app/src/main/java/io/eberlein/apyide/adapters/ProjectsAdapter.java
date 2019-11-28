@@ -107,7 +107,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
     @NonNull
     @Override
     public ProjectsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(ctx).inflate(R.layout.recyclerview_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(ctx).inflate(R.layout.item_recyclerview, parent, false));
     }
 
     @Override
