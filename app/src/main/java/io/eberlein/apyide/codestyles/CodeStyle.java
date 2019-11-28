@@ -10,15 +10,16 @@ import androidx.core.content.res.ResourcesCompat;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.eberlein.apyide.R;
+import io.eberlein.apyide.Static;
+import io.paperdb.Paper;
 
 
-public class LanguageStyle {
+public class CodeStyle {
     protected  String name;
 
-    List<CodeColor> colors;
+    protected List<CodeColor> colors;
 
-    LanguageStyle(){
+    public CodeStyle(){
         name = "default";
         colors = new ArrayList<>();
     }
@@ -28,7 +29,6 @@ public class LanguageStyle {
     }
 
     public Editable compile(Resources res, Editable e){
-        String lt = "LanguageStyle.compile";
         String t = e.toString();
         for(CodeColor c : colors){
             for(String s : c.getWords()){
@@ -41,6 +41,14 @@ public class LanguageStyle {
             }
         }
         return e;
+    }
+
+    public List<CodeColor> getCodeColors(){
+        return colors;
+    }
+
+    public void save(){
+        Paper.book(Static.BOOK_CODESTYLES).write(name, this);
     }
 }
 

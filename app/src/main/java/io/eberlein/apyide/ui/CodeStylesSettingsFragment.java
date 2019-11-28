@@ -16,14 +16,20 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.eberlein.apyide.R;
 import io.eberlein.apyide.Utils;
+import io.eberlein.apyide.adapters.CodeStyleAdapter;
+import io.eberlein.apyide.codestyles.CodeStyle;
+import io.eberlein.apyide.codestyles.CodeStyles;
 
 public class CodeStylesSettingsFragment extends Fragment {
+    private CodeStyleAdapter adapter;
+    private CodeStyles styles;
+
     @BindView(R.id.recycler)
     RecyclerView recycler;
 
     @OnClick(R.id.add)
     void add(){
-        Utils.replaceFragment(R.id.nav_host_fragment, this, new CodeStyleSettingsFragment());
+        Utils.replaceFragment(R.id.nav_host_fragment, this, new CodeStyleSettingsFragment(new CodeStyle()));
     }
 
     @Nullable
@@ -31,7 +37,10 @@ public class CodeStylesSettingsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_settings_code_styles, container, false);
         ButterKnife.bind(this, v);
+        styles = CodeStyles.load();
+        adapter = new CodeStyleAdapter(getContext(), this, styles);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        recycler.setAdapter(adapter);
         return v;
     }
 }

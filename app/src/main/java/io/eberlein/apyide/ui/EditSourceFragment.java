@@ -18,14 +18,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.eberlein.apyide.codestyles.LanguageStyle;
+import io.eberlein.apyide.codestyles.CodeStyle;
 import io.eberlein.apyide.Project;
 import io.eberlein.apyide.R;
 import io.eberlein.apyide.Termux;
 import io.eberlein.apyide.Utils;
 
 public class EditSourceFragment extends Fragment {
-    private LanguageStyle languageStyle;
+    private CodeStyle codeStyle;
     private Project project;
 
     @BindView(R.id.et_source) EditText source;
@@ -52,9 +52,9 @@ public class EditSourceFragment extends Fragment {
         Log.d(lt, "bound");
         source.setText(Utils.readFile(project.getMain(getContext())));
         Log.d(lt, "read main");
-        languageStyle = Utils.getStyles(getContext()).getStyles().get(0); // todo make choose able / get via shared preferences
+        codeStyle = Utils.getStyles(getContext()).getStyles().get(0); // todo make choose able / get via shared preferences
         Log.d(lt, "got language style");
-        source.setText(languageStyle.compile(getResources(), source.getText()));
+        source.setText(codeStyle.compile(getResources(), source.getText()));
         Log.d(lt, "set language style");
         source.addTextChangedListener(new TextWatcher() {
             @Override
@@ -69,7 +69,7 @@ public class EditSourceFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                languageStyle.compile(getResources(), s);
+                codeStyle.compile(getResources(), s);
             }
         });
         return root;

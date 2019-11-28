@@ -18,7 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import io.eberlein.apyide.codestyles.CodeStyles;
-import io.eberlein.apyide.codestyles.LanguageStyle;
+import io.eberlein.apyide.codestyles.CodeStyle;
 import io.eberlein.apyide.codestyles.PythonDarkula;
 
 public class Utils {
@@ -54,7 +54,7 @@ public class Utils {
         } else {
             if(cs.getStyles().size() == 0) cs.add(new PythonDarkula());
         }
-        for(LanguageStyle l : cs.getStyles()){
+        for(CodeStyle l : cs.getStyles()){
             Log.d("Utils.getStyles", l.getName());
         }
         return cs;
@@ -136,10 +136,6 @@ public class Utils {
             e.printStackTrace();
             return "";
         }
-    }
-
-    public static CodeStyles getCodeStyles(Context ctx){
-        return new CodeStyles(getAPyIDECodestylesPath(ctx));
     }
 
     public static String parseLastLog(Context ctx, String name){

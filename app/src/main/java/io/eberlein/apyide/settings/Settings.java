@@ -10,7 +10,7 @@ public class Settings {
         settings = new ArrayList<>();
         settings.add(new TermuxSetting());
         settings.add(new StorageSetting());
-        settings.add(new CodeStyleSetting());
+        settings.add(new CodeStylesSetting());
     }
 
     public List<Setting> getSettings() {

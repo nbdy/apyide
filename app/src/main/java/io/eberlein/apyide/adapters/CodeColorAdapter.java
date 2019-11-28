@@ -9,19 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import butterknife.ButterKnife;
-import io.eberlein.apyide.codestyles.CodeStyles;
-import io.eberlein.apyide.R;
+import java.util.List;
 
-public class CodeStyleAdapter extends RecyclerView.Adapter<CodeStyleAdapter.ViewHolder> {
+import butterknife.ButterKnife;
+import io.eberlein.apyide.R;
+import io.eberlein.apyide.codestyles.CodeColor;
+
+public class CodeColorAdapter extends RecyclerView.Adapter<CodeColorAdapter.ViewHolder> {
     private Context ctx;
     private Fragment currentFragment;
-    private CodeStyles codeStyles;
+    private List<CodeColor> codeColors;
 
-    public CodeStyleAdapter(Context ctx, Fragment currentFragment, CodeStyles codeStyles){
+    public CodeColorAdapter(Context ctx, Fragment currentFragment, List<CodeColor> codeColors){
         this.ctx = ctx;
         this.currentFragment = currentFragment;
-        this.codeStyles = codeStyles;
+        this.codeColors = codeColors;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -30,7 +32,7 @@ public class CodeStyleAdapter extends RecyclerView.Adapter<CodeStyleAdapter.View
             ButterKnife.bind(this, v);
         }
 
-        void setCodeStyle(){
+        void setCodeColor(CodeColor c){
 
         }
     }
@@ -38,16 +40,16 @@ public class CodeStyleAdapter extends RecyclerView.Adapter<CodeStyleAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(ctx).inflate(R.layout.item_code_style, parent, false));
+        return new ViewHolder(LayoutInflater.from(ctx).inflate(R.layout.item_code_color, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.setCodeColor(codeColors.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return codeStyles.size();
+        return codeColors.size();
     }
 }

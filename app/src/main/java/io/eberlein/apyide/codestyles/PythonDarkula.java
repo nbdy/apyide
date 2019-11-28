@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import io.eberlein.apyide.R;
 
-public class PythonDarkula extends LanguageStyle {
+public class PythonDarkula extends CodeStyle {
     public PythonDarkula(){
         super();
         name = "pyDarkula";

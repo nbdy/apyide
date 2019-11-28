@@ -11,7 +11,8 @@
     <string name="project_name">project name</string>
     <string name="projects">projects</string>
     <string name="delete">delete</string>
-
+    <string name="name">name</string>
+    <string name="sample_code">sample code</string>
     <string name="code_styles">code styles</string>
     <string name="code_style">code style</string>
 </resources>
