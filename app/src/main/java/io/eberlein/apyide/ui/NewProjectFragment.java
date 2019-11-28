@@ -22,6 +22,11 @@ public class NewProjectFragment extends Fragment {
 
     @OnClick(R.id.btn_create_project)
     void btnCreateProjectClicked(){
+        String pn = projectName.getText().toString();
+        if(pn.isEmpty()){
+            Toast.makeText(getContext(), "project name is needed", Toast.LENGTH_LONG).show();
+            return;
+        }
         Project u = Utils.getCreateProject(getContext(), projectName.getText().toString());
         if(u != null) {
             Utils.replaceFragment(R.id.nav_host_fragment,this, new EditSourceFragment(u));

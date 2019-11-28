@@ -3,6 +3,7 @@ package io.eberlein.apyide.ui;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,6 @@ public class EditSourceFragment extends Fragment {
 
     @OnClick(R.id.btn_run)
     void btnRunClicked(){
-
         List<String> args = new ArrayList<>();
         args.add(project.getMain(getContext()).getPath());
         // todo add extra arguments
@@ -39,15 +39,23 @@ public class EditSourceFragment extends Fragment {
     }
 
     public EditSourceFragment(Project project){
+        Log.d("EditSourceFragment", "init");
         this.project = project;
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        String lt = "EditSourceFragment.onCreateView";
+        Log.d(lt, "init");
         View root = inflater.inflate(R.layout.fragment_edit_source, container, false);
+        Log.d(lt, "inflated");
         ButterKnife.bind(this, root);
+        Log.d(lt, "bound");
         source.setText(Utils.readFile(project.getMain(getContext())));
+        Log.d(lt, "read main");
         languageStyle = Utils.getStyles(getContext()).getStyles().get(0); // todo make choose able / get via shared preferences
+        Log.d(lt, "got language style");
         source.setText(languageStyle.compile(getResources(), source.getText()));
+        Log.d(lt, "set language style");
         source.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

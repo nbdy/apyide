@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.eberlein.apyide.R;
-import io.eberlein.apyide.ProjectsAdapter;
+import io.eberlein.apyide.adapters.ProjectsAdapter;
 import io.eberlein.apyide.Utils;
 
 public class OpenProjectFragment extends Fragment {

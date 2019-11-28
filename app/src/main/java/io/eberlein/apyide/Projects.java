@@ -12,7 +12,7 @@ public class Projects {
     private File path;
     private List<Project> projects;
 
-    Projects(@NonNull File path){
+    public Projects(@NonNull File path){
         projects = new ArrayList<>();
         if(path.exists()) {
             this.path = path;
@@ -35,11 +35,11 @@ public class Projects {
         return null;
     }
 
-    Project getProject(int id){
+    public Project getProject(int id){
         return projects.get(id);
     }
 
-    int size(){
+    public int size(){
         return projects.size();
     }
 
@@ -50,7 +50,7 @@ public class Projects {
         return false;
     }
 
-    boolean add(Project p){
+    public boolean add(Project p){
         if(!has(p)) {projects.add(p); return true;}
         return false;
     }
@@ -59,7 +59,7 @@ public class Projects {
         return projects;
     }
 
-    void remove(String name){
+    public void remove(String name){
         for(int i=0; i<projects.size(); i++){
             if(projects.get(i).getName().equals(name)) projects.remove(i);
         }

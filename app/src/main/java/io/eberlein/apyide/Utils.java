@@ -32,7 +32,8 @@ public class Utils {
 
     public static void replaceFragment(int rid, Fragment c, Fragment n) {
         FragmentTransaction ft = c.getFragmentManager().beginTransaction();
-        ft.replace(rid, n, "");
+        ft.replace(rid, n);
+        ft.addToBackStack(n.getTag());
         ft.commit();
     }
 

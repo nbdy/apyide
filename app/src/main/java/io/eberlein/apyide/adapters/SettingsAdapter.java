@@ -1,4 +1,4 @@
-package io.eberlein.apyide;
+package io.eberlein.apyide.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.eberlein.apyide.R;
+import io.eberlein.apyide.settings.Setting;
+import io.eberlein.apyide.settings.Settings;
 
 public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHolder> {
     private Context ctx;

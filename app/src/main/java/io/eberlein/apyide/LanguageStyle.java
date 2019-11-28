@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 
 import androidx.core.content.res.ResourcesCompat;
 
@@ -64,6 +65,7 @@ public class LanguageStyle {
     }
 
     public Editable compile(Resources res, Editable e){
+        String lt = "LanguageStyle.compile";
         String t = e.toString();
         for(CodeColor c : colors){
             for(String s : c.getWords()){
@@ -85,12 +87,12 @@ class PythonDarkula extends LanguageStyle {
         super();
         name = "pyDarkula";
         colors.addAll(Arrays.asList(
-                new CodeColor(R.color.white, Arrays.asList("")),
+                //new CodeColor(R.color.white, Arrays.asList("")),
                 new CodeColor(R.color.orange, Arrays.asList(
-                        "def", "if", "import", "from", "class", "pass", "while", "True", "False",
-                        "for", "in", ",")),
-                new CodeColor(R.color.yellow, Arrays.asList("")),
-                new CodeColor(R.color.green, Arrays.asList("")),
+                        "def", "in", "if", "import", "from", "class", "pass", "while", "True", "False",
+                        "for", ",")),
+                //new CodeColor(R.color.yellow, Arrays.asList("")),
+                //new CodeColor(R.color.green, Arrays.asList("")),
                 new CodeColor(R.color.purple, Arrays.asList(
                         "__init__", "self")),
                 new CodeColor(R.color.blue, Arrays.asList(

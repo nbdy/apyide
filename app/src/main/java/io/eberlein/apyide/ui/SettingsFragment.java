@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.eberlein.apyide.R;
-import io.eberlein.apyide.SettingsAdapter;
+import io.eberlein.apyide.adapters.SettingsAdapter;
 
 public class SettingsFragment extends Fragment {
 

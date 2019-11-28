@@ -1,4 +1,4 @@
-package io.eberlein.apyide;
+package io.eberlein.apyide.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -18,6 +18,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
+import io.eberlein.apyide.Project;
+import io.eberlein.apyide.Projects;
+import io.eberlein.apyide.R;
+import io.eberlein.apyide.Utils;
 import io.eberlein.apyide.ui.EditSourceFragment;
 
 public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder> {

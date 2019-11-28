@@ -1,4 +1,4 @@
-package io.eberlein.apyide;
+package io.eberlein.apyide.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+
+import io.eberlein.apyide.Project;
+import io.eberlein.apyide.Projects;
+import io.eberlein.apyide.R;
 
 public class ProjectListAdapter extends BaseExpandableListAdapter {
 
