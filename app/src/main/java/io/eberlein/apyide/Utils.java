@@ -17,6 +17,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import io.eberlein.apyide.codestyles.CodeStyles;
+import io.eberlein.apyide.codestyles.LanguageStyle;
+import io.eberlein.apyide.codestyles.PythonDarkula;
+
 public class Utils {
     private static final String PYTHON_TEMPLATE_MAIN = "import logging\nlog = logging.getLogger(__name__)\n\n";
 

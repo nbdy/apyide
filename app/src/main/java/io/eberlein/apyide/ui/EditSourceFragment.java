@@ -18,7 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.eberlein.apyide.LanguageStyle;
+import io.eberlein.apyide.codestyles.LanguageStyle;
 import io.eberlein.apyide.Project;
 import io.eberlein.apyide.R;
 import io.eberlein.apyide.Termux;

@@ -1,4 +1,4 @@
-package io.eberlein.apyide;
+package io.eberlein.apyide.codestyles;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import butterknife.ButterKnife;
-import io.eberlein.apyide.CodeStyles;
+import io.eberlein.apyide.codestyles.CodeStyles;
 import io.eberlein.apyide.R;
 
 public class CodeStyleAdapter extends RecyclerView.Adapter<CodeStyleAdapter.ViewHolder> {
