@@ -1,13 +1,8 @@
 package io.eberlein.apyide.codestyles;
 
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
-
-import androidx.core.content.res.ResourcesCompat;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +37,7 @@ public class CodeStyle {
         return sampleCode;
     }
 
-    public Editable compile(Resources res, Editable e){
+    public Editable compile(Editable e){
         String t = e.toString();
         for(CodeColor c : colors){
             String s = c.getWord();
@@ -56,12 +51,16 @@ public class CodeStyle {
         return e;
     }
 
-    public boolean addCodeColor(CodeColor codeColor){
+    public boolean add(CodeColor codeColor){
         for(CodeColor c : colors){
             if(c.getWord().contains(codeColor.getWord()) || codeColor.getWord().contains(c.getWord())) return false;
         }
         colors.add(codeColor);
         return true;
+    }
+
+    public void remove(CodeColor codeColor){
+        colors.remove(codeColor);
     }
 
     public List<CodeColor> getCodeColors(){

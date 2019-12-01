@@ -7,10 +7,6 @@ import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import com.google.common.io.Files;
 
 import java.io.File;
@@ -22,16 +18,10 @@ public class Utils {
 
     private static final String KEY_SETTINGS = "apyide";
     private static final String KEY_SETTINGS_PATH = "path";
-    private static final String KEY_SETTINGS_STYLES = "styles";
     private static final String PATH_PROJECTS = "/projects/";
-    private static final String PATH_STYLES = "/styles/";
 
     private static File SDCARD(Context ctx){
         return ctx.getExternalFilesDir(null);
-    }
-
-    public static void replaceFragment(FragmentManager fm, Fragment n) {
-        fm.beginTransaction().replace(R.id.nav_host_fragment, n).addToBackStack(null).commit();
     }
 
     public static SharedPreferences getPreferences(Context ctx){
@@ -44,10 +34,6 @@ public class Utils {
 
     private static File getAPyIDEProjectsPath(Context ctx){
         return new File(getAPyIDEPath(ctx).getPath() + PATH_PROJECTS);
-    }
-
-    private static File getAPyIDECodestylesPath(Context ctx){
-        return new File(getAPyIDEPath(ctx) + PATH_STYLES);
     }
 
     static File getAPyIDEProjectPath(Context ctx, String name){
@@ -118,19 +104,5 @@ public class Utils {
 
     public static String parseLastLog(Context ctx, String name){
         return ""; // todo
-    }
-
-    public static InputMethodManager getInputMethodManager(Context ctx){
-        return (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
-    }
-
-    public static void hideKeyboard(Context ctx){
-        InputMethodManager i = getInputMethodManager(ctx);
-        if(i != null) i.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
-    }
-
-    public static void showKeyboard(Context ctx){
-        InputMethodManager i = getInputMethodManager(ctx);
-        if(i != null) i.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
     }
 }

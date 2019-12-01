@@ -8,8 +8,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.blankj.utilcode.util.FragmentUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -17,7 +19,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
-import io.eberlein.apyide.Utils;
 import io.eberlein.apyide.codestyles.CodeStyle;
 import io.eberlein.apyide.codestyles.CodeStyles;
 import io.eberlein.apyide.R;
@@ -27,12 +28,12 @@ import io.eberlein.apyide.ui.CodeStyleSettingsFragment;
 public class CodeStyleAdapter extends RecyclerView.Adapter<CodeStyleAdapter.ViewHolder> {
     private Context ctx;
     private CodeStyles codeStyles;
-    private FragmentManager fragmentManager;
+    private Fragment currentFragment;
 
-    public CodeStyleAdapter(Context ctx, FragmentManager fragmentManager, CodeStyles codeStyles){
+    public CodeStyleAdapter(Context ctx, Fragment currentFragment, CodeStyles codeStyles){
         this.ctx = ctx;
         this.codeStyles = codeStyles;
-        this.fragmentManager = fragmentManager;
+        this.currentFragment = currentFragment;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -53,7 +54,7 @@ public class CodeStyleAdapter extends RecyclerView.Adapter<CodeStyleAdapter.View
 
         @OnClick
         void onClick(){
-            Utils.replaceFragment(fragmentManager, new CodeStyleSettingsFragment(style));
+            FragmentUtils.replace(currentFragment, new CodeStyleSettingsFragment(style), true);
         }
 
         @OnLongClick

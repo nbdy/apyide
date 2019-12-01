@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.blankj.utilcode.util.FragmentUtils;
 
 import java.util.Date;
 
@@ -22,13 +23,12 @@ import butterknife.OnLongClick;
 import io.eberlein.apyide.Project;
 import io.eberlein.apyide.Projects;
 import io.eberlein.apyide.R;
-import io.eberlein.apyide.Utils;
 import io.eberlein.apyide.ui.EditSourceFragment;
 
 public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder> {
     private Projects projects;
     private Context ctx;
-    private FragmentManager fragmentManager;
+    private Fragment currentFragment;
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private Project project;
@@ -46,7 +46,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
         @OnClick
         void onClick(){
             if(extraMenuOpen) closeExtraMenu();
-            else Utils.replaceFragment(fragmentManager, new EditSourceFragment(projects.getProject(getAdapterPosition())));
+            else FragmentUtils.replace(currentFragment, new EditSourceFragment(projects.getProject(getAdapterPosition())), true);
         }
 
         @OnLongClick
@@ -94,10 +94,10 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
         }
     }
 
-    public ProjectsAdapter(Context ctx, FragmentManager fragmentManager, Projects projects) {
+    public ProjectsAdapter(Context ctx, Fragment currentFragment, Projects projects) {
         this.ctx = ctx;
         this.projects = projects;
-        this.fragmentManager = fragmentManager;
+        this.currentFragment = currentFragment;
     }
 
     @NonNull

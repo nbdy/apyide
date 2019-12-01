@@ -37,6 +37,7 @@ public class CodeStyles {
 
     public void remove(CodeStyle codeStyle){
         styles.remove(codeStyle);
+        Paper.book(Static.BOOK_CODESTYLES).delete(codeStyle.getName());
     }
 
     public CodeStyle get(int p){

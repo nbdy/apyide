@@ -9,6 +9,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.blankj.utilcode.util.FragmentUtils;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,12 +24,12 @@ public class HomeFragment extends Fragment {
 
     @OnClick(R.id.btn_create_project)
     void createProjectClicked(){
-        Utils.replaceFragment(getFragmentManager(), new NewProjectFragment());
+        FragmentUtils.replace(this, new NewProjectFragment(), true);
     }
 
     @OnClick(R.id.btn_open_project)
     void openProjectClicked(){
-        Utils.replaceFragment(getFragmentManager(), new OpenProjectFragment());
+        FragmentUtils.replace(this, new OpenProjectFragment(), true);
     }
 
     @OnClick(R.id.btn_install_python)

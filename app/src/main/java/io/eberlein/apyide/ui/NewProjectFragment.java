@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.blankj.utilcode.util.FragmentUtils;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -29,7 +31,7 @@ public class NewProjectFragment extends Fragment {
         }
         Project u = Utils.getCreateProject(getContext(), projectName.getText().toString());
         if(u != null) {
-            Utils.replaceFragment(getActivity().getSupportFragmentManager(), new EditSourceFragment(u));
+            FragmentUtils.replace(this, new EditSourceFragment(u), true);
             // todo attach to navbar
         } else {
             Toast.makeText(getContext(), "can not open / create '" + projectName.getText().toString() + "'", Toast.LENGTH_LONG).show();

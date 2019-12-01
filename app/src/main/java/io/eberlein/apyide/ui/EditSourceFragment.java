@@ -12,6 +12,8 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.blankj.utilcode.util.KeyboardUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +57,7 @@ public class EditSourceFragment extends Fragment {
         Log.d(lt, "read main");
         codeStyle = CodeStyles.load().getStyles().get(0); // todo make choose able / get via shared preferences
         Log.d(lt, "got language style");
-        source.setText(codeStyle.compile(getResources(), source.getText()));
+        source.setText(codeStyle.compile(source.getText()));
         Log.d(lt, "set language style");
         source.addTextChangedListener(new TextWatcher() {
             @Override
@@ -70,7 +72,7 @@ public class EditSourceFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                codeStyle.compile(getResources(), s);
+                codeStyle.compile(s);
             }
         });
         return root;
@@ -78,7 +80,7 @@ public class EditSourceFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        Utils.hideKeyboard(getContext());
+        KeyboardUtils.hideSoftInput(getActivity());
         super.onDestroy();
     }
 }
