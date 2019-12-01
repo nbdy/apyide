@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.FragmentUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Date;
 
 import butterknife.BindView;
@@ -23,6 +25,7 @@ import butterknife.OnLongClick;
 import io.eberlein.apyide.Project;
 import io.eberlein.apyide.Projects;
 import io.eberlein.apyide.R;
+import io.eberlein.apyide.events.ProjectDeletedEvent;
 import io.eberlein.apyide.ui.EditSourceFragment;
 
 public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder> {
@@ -42,6 +45,11 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
         @BindView(R.id.tv_right_down) TextView tv_right_down;
 
         @BindView(R.id.btn_right) Button btn_right;
+
+        @OnClick(R.id.btn_right)
+        void deleteClicked(){
+            EventBus.getDefault().post(new ProjectDeletedEvent(project));
+        }
 
         @OnClick
         void onClick(){
@@ -69,15 +77,6 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
             tv_right_down.setText("");
             btn_right.setVisibility(View.VISIBLE);
             btn_right.setText(ctx.getText(R.string.delete));
-            btn_right.setBackgroundColor(Color.parseColor("#f54242"));
-            btn_right.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    project.delete();
-                    projects.remove(project.getName());
-                    notifyDataSetChanged();
-                }
-            });
         }
 
         ViewHolder(View v){

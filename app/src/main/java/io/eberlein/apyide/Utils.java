@@ -2,9 +2,10 @@ package io.eberlein.apyide;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.blankj.utilcode.util.SDCardUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,16 +18,12 @@ public class Utils {
     private static final String KEY_SETTINGS_PATH = "path";
     private static final String PATH_PROJECTS = "/projects/";
 
-    private static File SDCARD(Context ctx){
-        return ctx.getExternalFilesDir(null);
-    }
-
     public static SharedPreferences getPreferences(Context ctx){
         return ctx.getSharedPreferences(KEY_SETTINGS, Context.MODE_PRIVATE);
     }
 
     private static File getAPyIDEPath(Context ctx){
-        return new File(getPreferences(ctx).getString(KEY_SETTINGS_PATH, Environment.getExternalStorageDirectory().getPath() + "/apyide/"));
+        return new File(getPreferences(ctx).getString(KEY_SETTINGS_PATH, SDCardUtils.getSDCardPathByEnvironment() + "/apyide/"));
     }
 
     private static File getAPyIDEProjectsPath(Context ctx){
@@ -43,7 +40,7 @@ public class Utils {
     }
 
     static void createDirectoryStructure(Context ctx){
-        Log.d("Utils.class", SDCARD(ctx).getPath());
+        Log.d("Utils.class", SDCardUtils.getSDCardPathByEnvironment());
         File f = getAPyIDEPath(ctx);
         if(!f.isDirectory() && !f.mkdirs()) couldNotCreateToast(ctx, f.getPath());
         File p = getAPyIDEProjectsPath(ctx);
@@ -88,9 +85,5 @@ public class Utils {
 
     public static Projects getProjects(Context ctx){
         return new Projects(getAPyIDEProjectsPath(ctx));
-    }
-
-    public static String parseLastLog(Context ctx, String name){
-        return ""; // todo
     }
 }
