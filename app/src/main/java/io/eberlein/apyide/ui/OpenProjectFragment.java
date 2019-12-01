@@ -2,7 +2,6 @@ package io.eberlein.apyide.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +37,7 @@ public class OpenProjectFragment extends Fragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onProjectDeletedEvent(ProjectDeletedEvent e){
-        e.getProject().delete();
-        projects.remove(e.getProject().getName());
+        projects.remove(e.getProject()); // todo fix
         adapter.notifyDataSetChanged();
     }
 

@@ -59,9 +59,8 @@ public class Projects {
         return projects;
     }
 
-    public void remove(String name){
-        for(int i=0; i<projects.size(); i++){
-            if(projects.get(i).getName().equals(name)) projects.remove(i);
-        }
+    public void remove(Project project){
+        projects.remove(project);
+        project.delete();
     }
 }
