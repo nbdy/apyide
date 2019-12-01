@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Date;
@@ -27,7 +28,7 @@ import io.eberlein.apyide.ui.EditSourceFragment;
 public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder> {
     private Projects projects;
     private Context ctx;
-    private Fragment currentFragment;
+    private FragmentManager fragmentManager;
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private Project project;
@@ -43,9 +44,9 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
         @BindView(R.id.btn_right) Button btn_right;
 
         @OnClick
-        void onClick(View v){
+        void onClick(){
             if(extraMenuOpen) closeExtraMenu();
-            else Utils.replaceFragment(R.id.nav_host_fragment, currentFragment, new EditSourceFragment(projects.getProject(getAdapterPosition())));
+            else Utils.replaceFragment(fragmentManager, new EditSourceFragment(projects.getProject(getAdapterPosition())));
         }
 
         @OnLongClick
@@ -67,7 +68,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
             tv_right_center.setText("");
             tv_right_down.setText("");
             btn_right.setVisibility(View.VISIBLE);
-            btn_right.setText("delete");
+            btn_right.setText(ctx.getText(R.string.delete));
             btn_right.setBackgroundColor(Color.parseColor("#f54242"));
             btn_right.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -93,15 +94,10 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
         }
     }
 
-    public ProjectsAdapter(Context ctx, Fragment currentFragment){
-        this.ctx = ctx;
-        this.currentFragment = currentFragment;
-    }
-
-    public ProjectsAdapter(Context ctx, Projects projects, Fragment currentFragment) {
+    public ProjectsAdapter(Context ctx, FragmentManager fragmentManager, Projects projects) {
         this.ctx = ctx;
         this.projects = projects;
-        this.currentFragment = currentFragment;
+        this.fragmentManager = fragmentManager;
     }
 
     @NonNull

@@ -1,8 +1,10 @@
 package io.eberlein.apyide.settings;
 
+import io.eberlein.apyide.ui.StorageSettingFragment;
+
 public class StorageSetting extends Setting {
     public StorageSetting(){
         name = "storage";
-        fragment = null; // todo StorageSettingFragment
+        fragment = new StorageSettingFragment();
     }
 }

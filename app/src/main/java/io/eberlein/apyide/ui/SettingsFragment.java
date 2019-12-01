@@ -23,7 +23,7 @@ public class SettingsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_settings, container, false);
         ButterKnife.bind(this, root);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        recycler.setAdapter(new SettingsAdapter(getContext(), this));
+        recycler.setAdapter(new SettingsAdapter(getContext(), getFragmentManager()));
         return root;
     }
 }

@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import butterknife.BindView;
@@ -21,18 +21,12 @@ import io.eberlein.apyide.settings.Settings;
 public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHolder> {
     private Context ctx;
     private Settings settings;
-    private Fragment currentFragment;
+    private FragmentManager fragmentManager;
 
-    public SettingsAdapter(Context ctx, Fragment currentFragment){
+    public SettingsAdapter(Context ctx, FragmentManager fragmentManager){
         this.ctx = ctx;
-        this.currentFragment = currentFragment;
+        this.fragmentManager = fragmentManager;
         this.settings = new Settings();
-    }
-
-    public SettingsAdapter(Context ctx, Fragment currentFragment, Settings settings){
-        this.ctx = ctx;
-        this.currentFragment = currentFragment;
-        this.settings = settings;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -48,8 +42,8 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
         @BindView(R.id.btn_right) Button btn_right;
 
         @OnClick
-        void onClick(View v){
-            setting.open(currentFragment);
+        void onClick(){
+            setting.open(fragmentManager);
         }
 
         ViewHolder(View v){

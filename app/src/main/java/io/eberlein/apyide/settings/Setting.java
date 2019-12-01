@@ -1,6 +1,7 @@
 package io.eberlein.apyide.settings;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import io.eberlein.apyide.R;
 import io.eberlein.apyide.Utils;
@@ -13,8 +14,8 @@ public class Setting {
 
     }
 
-    public void open(Fragment c){
-        Utils.replaceFragment(R.id.nav_host_fragment, c, fragment);
+    public void open(FragmentManager fm){
+        Utils.replaceFragment(fm, fragment);
     }
 
     public String getName() {

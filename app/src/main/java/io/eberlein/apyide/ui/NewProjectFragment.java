@@ -29,7 +29,7 @@ public class NewProjectFragment extends Fragment {
         }
         Project u = Utils.getCreateProject(getContext(), projectName.getText().toString());
         if(u != null) {
-            Utils.replaceFragment(R.id.nav_host_fragment,this, new EditSourceFragment(u));
+            Utils.replaceFragment(getActivity().getSupportFragmentManager(), new EditSourceFragment(u));
             // todo attach to navbar
         } else {
             Toast.makeText(getContext(), "can not open / create '" + projectName.getText().toString() + "'", Toast.LENGTH_LONG).show();

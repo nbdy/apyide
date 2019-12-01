@@ -8,17 +8,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.alibaba.fastjson.JSON;
 import com.google.common.io.Files;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import io.eberlein.apyide.codestyles.CodeStyles;
-import io.eberlein.apyide.codestyles.CodeStyle;
 
 public class Utils {
     private static final String PYTHON_TEMPLATE_MAIN = "import logging\nlog = logging.getLogger(__name__)\n\n";
@@ -33,11 +30,8 @@ public class Utils {
         return ctx.getExternalFilesDir(null);
     }
 
-    public static void replaceFragment(int rid, Fragment c, Fragment n) {
-        FragmentTransaction ft = c.getFragmentManager().beginTransaction();
-        ft.replace(rid, n);
-        ft.addToBackStack(n.getTag());
-        ft.commit();
+    public static void replaceFragment(FragmentManager fm, Fragment n) {
+        fm.beginTransaction().replace(R.id.nav_host_fragment, n).addToBackStack(null).commit();
     }
 
     public static SharedPreferences getPreferences(Context ctx){

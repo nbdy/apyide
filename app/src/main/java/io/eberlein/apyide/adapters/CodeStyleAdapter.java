@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -26,13 +26,13 @@ import io.eberlein.apyide.ui.CodeStyleSettingsFragment;
 
 public class CodeStyleAdapter extends RecyclerView.Adapter<CodeStyleAdapter.ViewHolder> {
     private Context ctx;
-    private Fragment currentFragment;
     private CodeStyles codeStyles;
+    private FragmentManager fragmentManager;
 
-    public CodeStyleAdapter(Context ctx, Fragment currentFragment, CodeStyles codeStyles){
+    public CodeStyleAdapter(Context ctx, FragmentManager fragmentManager, CodeStyles codeStyles){
         this.ctx = ctx;
-        this.currentFragment = currentFragment;
         this.codeStyles = codeStyles;
+        this.fragmentManager = fragmentManager;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -53,7 +53,7 @@ public class CodeStyleAdapter extends RecyclerView.Adapter<CodeStyleAdapter.View
 
         @OnClick
         void onClick(){
-            Utils.replaceFragment(R.id.nav_host_fragment, currentFragment, new CodeStyleSettingsFragment(style));
+            Utils.replaceFragment(fragmentManager, new CodeStyleSettingsFragment(style));
         }
 
         @OnLongClick

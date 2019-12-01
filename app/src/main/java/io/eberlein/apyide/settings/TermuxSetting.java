@@ -1,8 +1,10 @@
 package io.eberlein.apyide.settings;
 
+import io.eberlein.apyide.ui.TermuxSettingFragment;
+
 public class TermuxSetting extends Setting {
     public TermuxSetting(){
         name = "termux";
-        fragment = null; // todo TermuxSettingFragment
+        fragment = new TermuxSettingFragment();
     }
 }

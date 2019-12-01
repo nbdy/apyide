@@ -1,6 +1,7 @@
 package io.eberlein.apyide.codestyles;
 
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
@@ -15,10 +16,9 @@ import io.paperdb.Paper;
 
 
 public class CodeStyle {
-    protected String name;
-    protected String sampleCode;
-
-    protected List<CodeColor> colors;
+    private String name;
+    private String sampleCode;
+    private List<CodeColor> colors;
 
     public CodeStyle(){
         name = "default";
@@ -48,7 +48,7 @@ public class CodeStyle {
             String s = c.getWord();
             for(int i = t.indexOf(s); i >= 0; i = t.indexOf(s, i + 1)){
                 e.setSpan(
-                        new ForegroundColorSpan(ResourcesCompat.getColor(res, c.getColor(), null)),
+                        new ForegroundColorSpan(c.getColor()),
                         i, i + s.length(),
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }

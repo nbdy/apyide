@@ -29,7 +29,7 @@ public class OpenProjectFragment extends Fragment {
 
     private void populateProjects(){
         Context ctx = getContext();
-        projects.setAdapter(new ProjectsAdapter(ctx, Utils.getProjects(ctx), this));
+        projects.setAdapter(new ProjectsAdapter(ctx, getFragmentManager(), Utils.getProjects(ctx)));
         projects.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 }

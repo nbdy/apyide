@@ -22,12 +22,12 @@ public class HomeFragment extends Fragment {
 
     @OnClick(R.id.btn_create_project)
     void createProjectClicked(){
-        Utils.replaceFragment(R.id.nav_host_fragment, this, new NewProjectFragment());
+        Utils.replaceFragment(getFragmentManager(), new NewProjectFragment());
     }
 
     @OnClick(R.id.btn_open_project)
     void openProjectClicked(){
-        Utils.replaceFragment(R.id.nav_host_fragment, this, new OpenProjectFragment());
+        Utils.replaceFragment(getFragmentManager(), new OpenProjectFragment());
     }
 
     @OnClick(R.id.btn_install_python)

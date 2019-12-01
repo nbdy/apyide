@@ -35,6 +35,10 @@ public class CodeStyles {
         return null;
     }
 
+    public void remove(CodeStyle codeStyle){
+        styles.remove(codeStyle);
+    }
+
     public CodeStyle get(int p){
         return styles.get(p);
     }
