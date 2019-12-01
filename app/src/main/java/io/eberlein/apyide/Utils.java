@@ -19,7 +19,6 @@ import java.io.IOException;
 
 import io.eberlein.apyide.codestyles.CodeStyles;
 import io.eberlein.apyide.codestyles.CodeStyle;
-import io.eberlein.apyide.codestyles.PythonDarkula;
 
 public class Utils {
     private static final String PYTHON_TEMPLATE_MAIN = "import logging\nlog = logging.getLogger(__name__)\n\n";
@@ -43,21 +42,6 @@ public class Utils {
 
     public static SharedPreferences getPreferences(Context ctx){
         return ctx.getSharedPreferences(KEY_SETTINGS, Context.MODE_PRIVATE);
-    }
-
-    public static CodeStyles getStyles(Context ctx){
-        SharedPreferences s = getPreferences(ctx);
-        CodeStyles cs = JSON.parseObject(s.getString(KEY_SETTINGS_STYLES, "{}"), CodeStyles.class);
-        if(cs == null) {
-            cs = new CodeStyles();
-            cs.add(new PythonDarkula());
-        } else {
-            if(cs.getStyles().size() == 0) cs.add(new PythonDarkula());
-        }
-        for(CodeStyle l : cs.getStyles()){
-            Log.d("Utils.getStyles", l.getName());
-        }
-        return cs;
     }
 
     private static File getAPyIDEPath(Context ctx){

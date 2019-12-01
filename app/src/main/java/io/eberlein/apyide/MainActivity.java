@@ -25,6 +25,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.paperdb.Paper;

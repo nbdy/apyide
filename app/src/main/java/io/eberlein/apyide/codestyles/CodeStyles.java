@@ -35,6 +35,10 @@ public class CodeStyles {
         return null;
     }
 
+    public CodeStyle get(int p){
+        return styles.get(p);
+    }
+
     public String[] getNames(){
         List<String> r = new ArrayList<>();
         for(CodeStyle c : styles) r.add(c.getName());

@@ -1,42 +1,51 @@
 package io.eberlein.apyide.codestyles;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
 import io.eberlein.apyide.R;
 
 public class CodeColor {
+    private String key;
     private int color;
-    private List<String> words;
+    private String word;
 
     public CodeColor(){
+        key = UUID.randomUUID().toString();
         color = R.color.white;
-        words = new ArrayList<>();
     }
 
     public CodeColor(int color){
+        key = UUID.randomUUID().toString();
         this.color = color;
-        words = new ArrayList<>();
     }
 
-    public CodeColor(int color, List<String> words){
+    public CodeColor(int color, String word){
+        key = UUID.randomUUID().toString();
         this.color = color;
-        this.words = words;
+        this.word = word;
     }
 
-    public void addWord(String word){
-        if(!words.contains(word)) words.add(word);
+    public void setColor(int color) {
+        this.color = color;
     }
 
-    public void removeWord(String word){
-        words.remove(word);
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    public String getWord() {
+        return word;
     }
 
     public int getColor() {
         return color;
     }
 
-    public List<String> getWords() {
-        return words;
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

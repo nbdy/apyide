@@ -47,4 +47,8 @@ dependencies {
     implementation 'com.google.guava:guava:28.1-android'
 
     implementation 'io.paperdb:paperdb:2.6'
+
+    implementation 'com.larswerkman:HoloColorPicker:1.5'
+
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }

@@ -23,6 +23,7 @@ import io.eberlein.apyide.Project;
 import io.eberlein.apyide.R;
 import io.eberlein.apyide.Termux;
 import io.eberlein.apyide.Utils;
+import io.eberlein.apyide.codestyles.CodeStyles;
 
 public class EditSourceFragment extends Fragment {
     private CodeStyle codeStyle;
@@ -52,7 +53,7 @@ public class EditSourceFragment extends Fragment {
         Log.d(lt, "bound");
         source.setText(Utils.readFile(project.getMain(getContext())));
         Log.d(lt, "read main");
-        codeStyle = Utils.getStyles(getContext()).getStyles().get(0); // todo make choose able / get via shared preferences
+        codeStyle = CodeStyles.load().getStyles().get(0); // todo make choose able / get via shared preferences
         Log.d(lt, "got language style");
         source.setText(codeStyle.compile(getResources(), source.getText()));
         Log.d(lt, "set language style");

@@ -15,12 +15,14 @@ import io.paperdb.Paper;
 
 
 public class CodeStyle {
-    protected  String name;
+    protected String name;
+    protected String sampleCode;
 
     protected List<CodeColor> colors;
 
     public CodeStyle(){
         name = "default";
+        sampleCode = "from log import logging";
         colors = new ArrayList<>();
     }
 
@@ -28,19 +30,38 @@ public class CodeStyle {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSampleCode(String sampleCode) {
+        this.sampleCode = sampleCode;
+    }
+
+    public String getSampleCode() {
+        return sampleCode;
+    }
+
     public Editable compile(Resources res, Editable e){
         String t = e.toString();
         for(CodeColor c : colors){
-            for(String s : c.getWords()){
-                for(int i = t.indexOf(s); i >= 0; i = t.indexOf(s, i + 1)){
-                    e.setSpan(
-                            new ForegroundColorSpan(ResourcesCompat.getColor(res, c.getColor(), null)),
-                            i, i + s.length(),
-                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
+            String s = c.getWord();
+            for(int i = t.indexOf(s); i >= 0; i = t.indexOf(s, i + 1)){
+                e.setSpan(
+                        new ForegroundColorSpan(ResourcesCompat.getColor(res, c.getColor(), null)),
+                        i, i + s.length(),
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
         return e;
+    }
+
+    public boolean addCodeColor(CodeColor codeColor){
+        for(CodeColor c : colors){
+            if(c.getWord().contains(codeColor.getWord()) || codeColor.getWord().contains(c.getWord())) return false;
+        }
+        colors.add(codeColor);
+        return true;
     }
 
     public List<CodeColor> getCodeColors(){
