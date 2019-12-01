@@ -42,10 +42,6 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
 
-    implementation 'com.alibaba:fastjson:1.1.71.android'
-
-    implementation 'com.google.guava:guava:28.1-android'
-
     implementation 'io.paperdb:paperdb:2.6'
 
     implementation 'com.larswerkman:HoloColorPicker:1.5'

@@ -4,10 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.util.Log;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
-
-import com.google.common.io.Files;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -91,15 +88,6 @@ public class Utils {
 
     public static Projects getProjects(Context ctx){
         return new Projects(getAPyIDEProjectsPath(ctx));
-    }
-
-    public static String readFile(File file){
-        try {
-            return new String(Files.toByteArray(file));
-        } catch (IOException e){
-            e.printStackTrace();
-            return "";
-        }
     }
 
     public static String parseLastLog(Context ctx, String name){

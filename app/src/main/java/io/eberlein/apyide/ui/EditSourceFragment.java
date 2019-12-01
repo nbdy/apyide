@@ -12,6 +12,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 
 import java.util.ArrayList;
@@ -24,7 +25,6 @@ import io.eberlein.apyide.codestyles.CodeStyle;
 import io.eberlein.apyide.Project;
 import io.eberlein.apyide.R;
 import io.eberlein.apyide.Termux;
-import io.eberlein.apyide.Utils;
 import io.eberlein.apyide.codestyles.CodeStyles;
 
 public class EditSourceFragment extends Fragment {
@@ -53,7 +53,7 @@ public class EditSourceFragment extends Fragment {
         Log.d(lt, "inflated");
         ButterKnife.bind(this, root);
         Log.d(lt, "bound");
-        source.setText(Utils.readFile(project.getMain(getContext())));
+        source.setText(FileIOUtils.readFile2String(project.getMain(getContext())));
         Log.d(lt, "read main");
         codeStyle = CodeStyles.load().getStyles().get(0); // todo make choose able / get via shared preferences
         Log.d(lt, "got language style");
