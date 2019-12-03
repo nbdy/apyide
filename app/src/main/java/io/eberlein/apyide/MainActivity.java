@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,7 +16,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.FragmentUtils;
+import com.blankj.utilcode.util.ImageUtils;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -118,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         navigationView.setItemIconTintList(null);
-
         requestPermissions(new String[]{Static.PERMISSION_STORAGE}, Static.PERMISSION_STORAGE_CODE);
     }
 

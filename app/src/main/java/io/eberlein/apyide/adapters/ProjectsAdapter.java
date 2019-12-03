@@ -47,6 +47,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
 
         @OnClick(R.id.btn_right)
         void deleteClicked(){
+            btn_right.setVisibility(View.GONE);
             EventBus.getDefault().post(new ProjectDeletedEvent(project));
         }
 

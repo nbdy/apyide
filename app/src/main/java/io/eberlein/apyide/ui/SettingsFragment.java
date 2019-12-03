@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import io.eberlein.apyide.R;
 import io.eberlein.apyide.adapters.SettingsAdapter;
 
-class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment {
 
     @BindView(R.id.recycler) RecyclerView recycler;
 
