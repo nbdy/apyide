@@ -3,7 +3,7 @@ package io.eberlein.apyide.events;
 import io.eberlein.apyide.Project;
 
 public class ProjectDeletedEvent {
-    private Project project;
+    private final Project project;
 
     public ProjectDeletedEvent(Project project){
         this.project = project;

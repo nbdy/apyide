@@ -40,7 +40,7 @@
     <Button
         android:id="@+id/btn_install_python"
         android:layout_below="@id/btn_open_project"
-        android:text="install python"
+        android:text="@string/install_python"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

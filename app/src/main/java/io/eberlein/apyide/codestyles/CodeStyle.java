@@ -13,7 +13,7 @@ import io.paperdb.Paper;
 public class CodeStyle {
     private String name;
     private String sampleCode;
-    private List<CodeColor> colors;
+    private final List<CodeColor> colors;
 
     public CodeStyle(){
         name = "default";
@@ -51,12 +51,11 @@ public class CodeStyle {
         return e;
     }
 
-    public boolean add(CodeColor codeColor){
+    public void add(CodeColor codeColor){
         for(CodeColor c : colors){
-            if(c.getWord().contains(codeColor.getWord()) || codeColor.getWord().contains(c.getWord())) return false;
+            if(c.getWord().contains(codeColor.getWord()) || codeColor.getWord().contains(c.getWord())) return;
         }
         colors.add(codeColor);
-        return true;
     }
 
     public void remove(CodeColor codeColor){

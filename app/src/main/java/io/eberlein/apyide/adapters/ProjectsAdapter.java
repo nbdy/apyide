@@ -1,7 +1,6 @@
 package io.eberlein.apyide.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +28,9 @@ import io.eberlein.apyide.events.ProjectDeletedEvent;
 import io.eberlein.apyide.ui.EditSourceFragment;
 
 public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder> {
-    private Projects projects;
-    private Context ctx;
-    private Fragment currentFragment;
+    private final Projects projects;
+    private final Context ctx;
+    private final Fragment currentFragment;
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private Project project;

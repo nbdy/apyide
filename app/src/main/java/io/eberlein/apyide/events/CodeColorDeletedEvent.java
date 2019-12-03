@@ -3,7 +3,7 @@ package io.eberlein.apyide.events;
 import io.eberlein.apyide.codestyles.CodeColor;
 
 public class CodeColorDeletedEvent {
-    private CodeColor codeColor;
+    private final CodeColor codeColor;
 
     public CodeColorDeletedEvent(CodeColor codeColor){
         this.codeColor = codeColor;

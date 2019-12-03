@@ -26,9 +26,9 @@ import io.eberlein.apyide.events.CodeStyleDeletedEvent;
 import io.eberlein.apyide.ui.CodeStyleSettingsFragment;
 
 public class CodeStyleAdapter extends RecyclerView.Adapter<CodeStyleAdapter.ViewHolder> {
-    private Context ctx;
-    private CodeStyles codeStyles;
-    private Fragment currentFragment;
+    private final Context ctx;
+    private final CodeStyles codeStyles;
+    private final Fragment currentFragment;
 
     public CodeStyleAdapter(Context ctx, Fragment currentFragment, CodeStyles codeStyles){
         this.ctx = ctx;

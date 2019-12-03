@@ -7,10 +7,11 @@ import androidx.annotation.NonNull;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Projects {
     private File path;
-    private List<Project> projects;
+    private final List<Project> projects;
 
     public Projects(@NonNull File path){
         projects = new ArrayList<>();
@@ -22,7 +23,7 @@ public class Projects {
 
     private void loadDirectory(){
         Log.d("Projects.loadDirectory", "loading " + path.getPath());
-        for(File f : path.listFiles()){
+        for(File f : Objects.requireNonNull(path.listFiles())){
             Log.d("> ", f.getName());
             add(new Project(f));
         }

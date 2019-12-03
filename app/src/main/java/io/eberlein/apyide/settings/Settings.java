@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Settings {
-    private List<Setting> settings;
+    private final List<Setting> settings;
 
     public Settings(){
         settings = new ArrayList<>();

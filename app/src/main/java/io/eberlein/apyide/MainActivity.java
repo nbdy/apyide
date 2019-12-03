@@ -9,14 +9,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.blankj.utilcode.util.BusUtils;
 import com.blankj.utilcode.util.FragmentUtils;
 import com.google.android.material.navigation.NavigationView;
 
@@ -27,8 +25,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.widget.Toast;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,21 +63,15 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder b = new AlertDialog.Builder(this);
         b.setMessage("download modified version of termux?");
         b.setTitle("download termux");
-        b.setNegativeButton("no", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Utils.getPreferences(getApplicationContext()).edit().putBoolean(Static.ENABLE_TERMUX, false).apply();
-                Toast.makeText(getApplicationContext(), "executing code won't be possible", Toast.LENGTH_LONG).show();
-                dialog.dismiss();
-            }
+        b.setNegativeButton("no", (dialog, which) -> {
+            Utils.getPreferences(getApplicationContext()).edit().putBoolean(Static.ENABLE_TERMUX, false).apply();
+            Toast.makeText(getApplicationContext(), "executing code won't be possible", Toast.LENGTH_LONG).show();
+            dialog.dismiss();
         });
-        b.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(Static.TERMUX_APK_URL));
-                startActivity(i);
-            }
+        b.setPositiveButton("yes", (dialog, which) -> {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(Static.TERMUX_APK_URL));
+            startActivity(i);
         });
         b.create().show();
     }

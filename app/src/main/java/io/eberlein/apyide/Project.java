@@ -6,12 +6,13 @@ import android.util.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Project {
     private Long lastModified = 0L;
-    private File path;
-    private String name;
-    private List<File> files;
+    private final File path;
+    private final String name;
+    private final List<File> files;
 
     private ProjectRunConfiguration prc;
 
@@ -23,9 +24,9 @@ public class Project {
         loadRunConfig(path);
     }
 
-    public void load(File directory){
+    private void load(File directory){
         Log.d("Project.load", directory.getPath());
-        for(File f : directory.listFiles()){
+        for(File f : Objects.requireNonNull(directory.listFiles())){
             if(f.lastModified() > lastModified) lastModified = f.lastModified();
             if(f.isDirectory()) load(f);
             else if(f.isFile()){

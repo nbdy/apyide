@@ -19,9 +19,9 @@ import io.eberlein.apyide.settings.Setting;
 import io.eberlein.apyide.settings.Settings;
 
 public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHolder> {
-    private Context ctx;
-    private Settings settings;
-    private Fragment currentFragment;
+    private final Context ctx;
+    private final Settings settings;
+    private final Fragment currentFragment;
 
     public SettingsAdapter(Context ctx, Fragment currentFragment){
         this.ctx = ctx;

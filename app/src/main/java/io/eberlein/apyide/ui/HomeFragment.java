@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 
 import com.blankj.utilcode.util.FragmentUtils;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -19,7 +21,7 @@ import io.eberlein.apyide.Static;
 import io.eberlein.apyide.Termux;
 import io.eberlein.apyide.Utils;
 
-public class HomeFragment extends Fragment {
+class HomeFragment extends Fragment {
     @BindView(R.id.btn_install_python) Button installPython;
 
     @OnClick(R.id.btn_create_project)
@@ -43,7 +45,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, root);
-        if(!Utils.getPreferences(getContext()).getBoolean(Static.ENABLE_TERMUX, true)){
+        if(!Utils.getPreferences(Objects.requireNonNull(getContext())).getBoolean(Static.ENABLE_TERMUX, true)){
             installPython.setVisibility(View.GONE);
         }
         return root;

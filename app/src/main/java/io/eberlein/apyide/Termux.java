@@ -23,7 +23,7 @@ public class Termux {
 
     private static final String EXTRA_EXECUTE_IN_BACKGROUND = "com.termux.execute.background";
 
-    private Context ctx;
+    private final Context ctx;
 
     public Termux(Context ctx){
         this.ctx = ctx;

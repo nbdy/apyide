@@ -12,13 +12,12 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.blankj.utilcode.util.ArrayUtils;
 import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +30,7 @@ import io.eberlein.apyide.codestyles.CodeStyles;
 
 public class EditSourceFragment extends Fragment {
     private CodeStyle codeStyle;
-    private Project project;
+    private final Project project;
     private File currentFile; // todo choose from sidebar
 
     @BindView(R.id.et_source) EditText source;
@@ -40,7 +39,7 @@ public class EditSourceFragment extends Fragment {
     void btnRunClicked(){
         FileIOUtils.writeFileFromString(currentFile, source.getText().toString());
         String[] args = {currentFile.getAbsolutePath()};
-        Log.d("EditSourceFragment.btnRunClicked", args.toString());
+        Log.d("EditSourceFragment.btnRunClicked", Arrays.toString(args));
         // todo fix logging
         // print works / logging does not
         Termux.run(getContext(), "python3", args);
@@ -83,7 +82,7 @@ public class EditSourceFragment extends Fragment {
     @Override
     public void onDestroy() {
         FileIOUtils.writeFileFromString(currentFile, source.getText().toString());
-        KeyboardUtils.hideSoftInput(getActivity());
+        KeyboardUtils.hideSoftInput(Objects.requireNonNull(getActivity()));
         super.onDestroy();
     }
 }

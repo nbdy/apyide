@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import com.blankj.utilcode.util.FragmentUtils;
 
 public class Setting {
-    protected String name;
-    protected Fragment fragment;
+    String name;
+    Fragment fragment;
 
-    public Setting(){}
+    Setting(){}
 
     public void open(Fragment c){
         FragmentUtils.replace(c, fragment, true);

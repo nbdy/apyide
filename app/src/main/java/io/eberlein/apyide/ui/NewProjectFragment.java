@@ -19,7 +19,7 @@ import io.eberlein.apyide.Project;
 import io.eberlein.apyide.R;
 import io.eberlein.apyide.Utils;
 
-public class NewProjectFragment extends Fragment {
+class NewProjectFragment extends Fragment {
     @BindView(R.id.et_project_name) EditText projectName;
 
     @OnClick(R.id.btn_create_project)

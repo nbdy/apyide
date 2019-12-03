@@ -23,6 +23,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -34,7 +36,7 @@ import io.eberlein.apyide.events.CodeColorDeletedEvent;
 import io.eberlein.apyide.events.CodeColorEditEvent;
 
 public class CodeStyleSettingsFragment extends Fragment {
-    private CodeStyle style;
+    private final CodeStyle style;
     private CodeColorAdapter adapter;
 
     @BindView(R.id.name)
@@ -47,30 +49,22 @@ public class CodeStyleSettingsFragment extends Fragment {
     RecyclerView recycler;
 
     private void showColorPickerDialog(final CodeColor c){
-        AlertDialog.Builder b = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder b = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
         View v = LayoutInflater.from(getContext()).inflate(R.layout.dialog_code_color, null, false);
         ColorPicker picker = v.findViewById(R.id.picker);
         EditText code = v.findViewById(R.id.code);
         picker.setColor(c.getColor());
         code.setText(c.getWord());
         b.setView(v);
-        b.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        b.setNegativeButton("cancel", (dialog, which) -> dialog.dismiss());
 
-        b.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                c.setWord(code.getText().toString());
-                c.setColor(picker.getColor());
-                style.add(c);
-                adapter.notifyDataSetChanged();
-                dialog.dismiss();
-                style.compile(code.getText());
-            }
+        b.setPositiveButton("ok", (dialog, which) -> {
+            c.setWord(code.getText().toString());
+            c.setColor(picker.getColor());
+            style.add(c);
+            adapter.notifyDataSetChanged();
+            dialog.dismiss();
+            style.compile(code.getText());
         });
         b.show();
     }

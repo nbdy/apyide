@@ -9,9 +9,9 @@ import io.paperdb.Paper;
 
 
 public class CodeStyles {
-    private List<CodeStyle> styles;
+    private final List<CodeStyle> styles;
 
-    public CodeStyles(){
+    private CodeStyles(){
         styles = new ArrayList<>();
     }
 
@@ -24,7 +24,7 @@ public class CodeStyles {
         return cs;
     }
 
-    public void add(CodeStyle c){
+    private void add(CodeStyle c){
         styles.add(c);
     }
 

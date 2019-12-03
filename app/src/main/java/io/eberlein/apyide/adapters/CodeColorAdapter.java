@@ -19,13 +19,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
 import io.eberlein.apyide.R;
-import io.eberlein.apyide.Utils;
 import io.eberlein.apyide.codestyles.CodeColor;
 import io.eberlein.apyide.events.CodeColorEditEvent;
 
 public class CodeColorAdapter extends RecyclerView.Adapter<CodeColorAdapter.ViewHolder> {
-    private Context ctx;
-    private List<CodeColor> codeColors;
+    private final Context ctx;
+    private final List<CodeColor> codeColors;
 
     public CodeColorAdapter(Context ctx, List<CodeColor> codeColors){
         this.ctx = ctx;

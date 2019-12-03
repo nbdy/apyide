@@ -22,7 +22,7 @@ import io.eberlein.apyide.adapters.ProjectsAdapter;
 import io.eberlein.apyide.Utils;
 import io.eberlein.apyide.events.ProjectDeletedEvent;
 
-public class OpenProjectFragment extends Fragment {
+class OpenProjectFragment extends Fragment {
     private Projects projects;
     private ProjectsAdapter adapter;
 

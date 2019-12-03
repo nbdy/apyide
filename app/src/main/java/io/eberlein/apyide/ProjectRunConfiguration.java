@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.List;
 
-public class ProjectRunConfiguration {
+class ProjectRunConfiguration {
     private String main;
     private List<String> arguments;
 
