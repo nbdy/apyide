@@ -1,10 +1,8 @@
 package io.eberlein.apyide;
 
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.app.DownloadManager;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,10 +13,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.FragmentUtils;
-import com.blankj.utilcode.util.ImageUtils;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -26,6 +21,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -72,9 +68,10 @@ public class MainActivity extends AppCompatActivity {
             dialog.dismiss();
         });
         b.setPositiveButton("yes", (dialog, which) -> {
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(Static.TERMUX_APK_URL));
-            startActivity(i);
+            DownloadManager.Request r = new DownloadManager.Request(Uri.parse(Static.TERMUX_APK_URL));
+            r.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "termux.apk");
+            r.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            ((DownloadManager) getSystemService(DOWNLOAD_SERVICE)).enqueue(r);
         });
         b.create().show();
     }

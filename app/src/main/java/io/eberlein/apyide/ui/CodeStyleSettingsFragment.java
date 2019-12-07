@@ -1,6 +1,5 @@
 package io.eberlein.apyide.ui;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
