@@ -1,3 +1,6 @@
+## not supported anymore
+#### [spacevim](https://spacevim.org/) exists and works in termux and nhterm
+
 ## apyide
 [![Build Status](http://build.eberlein.io:8080/job/android_apyide/badge/icon)](http://build.eberlein.io:8080/job/android_apyide/)
 
