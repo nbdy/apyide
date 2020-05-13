@@ -1,5 +1,6 @@
 package io.eberlein.apyide.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ public class CodeStylesSettingsFragment extends Fragment {
         FragmentUtils.replace(this, new CodeStyleSettingsFragment(new CodeStyle()), true);
     }
 
+    @SuppressLint("LongLogTag")
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onStyleDeletedEvent(CodeStyleDeletedEvent e){
         Log.d("CodeStyleSettingsFragment.onStyleDeletedEvent", e.getStyle().getName());

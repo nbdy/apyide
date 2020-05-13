@@ -21,6 +21,7 @@ public class CodeStyles {
         for(String k : b.getAllKeys()){
             cs.add(b.read(k));
         }
+        if(cs.empty()) cs.add(new CodeStyle());
         return cs;
     }
 
@@ -57,4 +58,6 @@ public class CodeStyles {
     public int size(){
         return styles.size();
     }
+
+    public boolean empty() {return styles.isEmpty();}
 }

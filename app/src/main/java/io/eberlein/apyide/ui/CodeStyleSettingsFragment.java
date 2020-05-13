@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,8 +22,6 @@ import com.larswerkman.holocolorpicker.ColorPicker;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,7 +47,7 @@ public class CodeStyleSettingsFragment extends Fragment {
     RecyclerView recycler;
 
     private void showColorPickerDialog(final CodeColor c){
-        AlertDialog.Builder b = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
+        AlertDialog.Builder b = new AlertDialog.Builder(requireContext());
         View v = LayoutInflater.from(getContext()).inflate(R.layout.dialog_code_color, null, false);
         ColorPicker picker = v.findViewById(R.id.picker);
         EditText code = v.findViewById(R.id.code);
@@ -114,6 +113,7 @@ public class CodeStyleSettingsFragment extends Fragment {
         style.compile(code.getText());
         adapter = new CodeColorAdapter(getContext(), style.getCodeColors());
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        recycler.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         recycler.setAdapter(adapter);
         return v;
     }

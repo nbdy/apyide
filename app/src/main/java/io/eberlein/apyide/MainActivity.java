@@ -13,7 +13,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.FragmentUtils;
+import com.blankj.utilcode.util.PermissionUtils;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         PackageManager pm = getPackageManager();
         try{
             pm.getPackageInfo(Static.TERMUX_PACKAGE, 0);
-            Log.i("MainActivity.isTermuxInstalled", "found termux");
+            Log.i("MainActivity.iTI", "found termux");
             requestPermissions(new String[]{Static.PERMISSION_TERMUX}, Static.PERMISSION_TERMUX_CODE);
         } catch (PackageManager.NameNotFoundException e){
             e.printStackTrace();
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private void askForTermuxDownload(){
         SharedPreferences s = Utils.getPreferences(this);
         boolean askTermuxDownload = s.getBoolean(Static.ASK_TERMUX_DOWNLOAD, true);
-        Log.d("MainActivity.askForTermuxDownload", String.valueOf(askTermuxDownload));
+        Log.d("MainActivity.afTD", String.valueOf(askTermuxDownload));
         if(s.getBoolean(Static.ASK_TERMUX_DOWNLOAD, true)) downloadTermux();
         else s.edit().putBoolean(Static.ENABLE_TERMUX, false).apply();
     }
@@ -78,17 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        String lk = "MainActivity.onRequestPermissionsResult";
-        if(requestCode == Static.PERMISSION_STORAGE_CODE){
-            if(grantResults.length > 0 && grantResults[0] == 0){
-                Log.d( lk, "got storage permission");
-                Utils.createDirectoryStructure(this);
-            } else {
-                Log.d(lk, "storage permission denied");
-                Toast.makeText(this, "cannot create directory structure without permission", Toast.LENGTH_LONG).show();
-            }
-            isTermuxInstalled();
-        } else if (requestCode == Static.PERMISSION_TERMUX_CODE) {
+        String lk = "MainActivity:RPR";
+        if (requestCode == Static.PERMISSION_TERMUX_CODE) {
             if(grantResults.length > 0 && grantResults[0] == 0){
                 Log.d(lk, "got termux permission");
                 Utils.getPreferences(this).edit().putBoolean(Static.ENABLE_TERMUX, true).apply();
@@ -118,7 +112,18 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         navigationView.setItemIconTintList(null);
-        requestPermissions(new String[]{Static.PERMISSION_STORAGE}, Static.PERMISSION_STORAGE_CODE);
+        PermissionUtils.permission(PermissionConstants.STORAGE).callback(new PermissionUtils.SimpleCallback() {
+            @Override
+            public void onGranted() {
+                Utils.createDirectoryStructure(getApplicationContext());
+                isTermuxInstalled();
+            }
+
+            @Override
+            public void onDenied() {
+                Toast.makeText(getApplicationContext(), "cannot create directory structure without permission", Toast.LENGTH_LONG).show();
+            }
+        }).request();
     }
 
     @Override

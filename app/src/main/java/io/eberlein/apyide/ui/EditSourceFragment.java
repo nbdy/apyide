@@ -17,7 +17,6 @@ import com.blankj.utilcode.util.KeyboardUtils;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +38,7 @@ public class EditSourceFragment extends Fragment {
     void btnRunClicked(){
         FileIOUtils.writeFileFromString(currentFile, source.getText().toString());
         String[] args = {currentFile.getAbsolutePath()};
-        Log.d("EditSourceFragment.btnRunClicked", Arrays.toString(args));
+        Log.d("EditSourceFragment.bRC", Arrays.toString(args));
         // todo fix logging
         // print works / logging does not
         Termux.run(getContext(), "python3", args);
@@ -51,7 +50,7 @@ public class EditSourceFragment extends Fragment {
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        String lt = "EditSourceFragment.onCreateView";
+        String lt = "EditSourceFragment.oCV";
         currentFile = project.getMain(getContext());
         Log.d(lt, "init");
         View root = inflater.inflate(R.layout.fragment_edit_source, container, false);
@@ -82,7 +81,7 @@ public class EditSourceFragment extends Fragment {
     @Override
     public void onDestroy() {
         FileIOUtils.writeFileFromString(currentFile, source.getText().toString());
-        KeyboardUtils.hideSoftInput(Objects.requireNonNull(getActivity()));
+        KeyboardUtils.hideSoftInput(requireActivity());
         super.onDestroy();
     }
 }

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 
 import java.io.File;
@@ -42,9 +43,9 @@ public class Utils {
     static void createDirectoryStructure(Context ctx){
         Log.d("Utils.class", SDCardUtils.getSDCardPathByEnvironment());
         File f = getAPyIDEPath(ctx);
-        if(!f.isDirectory() && !f.mkdirs()) couldNotCreateToast(ctx, f.getPath());
+        if(!FileUtils.createOrExistsDir(f)) couldNotCreateToast(ctx, f.getPath());
         File p = getAPyIDEProjectsPath(ctx);
-        if(!p.isDirectory() && !p.mkdirs()) couldNotCreateToast(ctx, p.getPath());
+        if(!FileUtils.createOrExistsDir(p)) couldNotCreateToast(ctx, p.getPath());
 
     }
 
