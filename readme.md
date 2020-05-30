@@ -2,7 +2,7 @@
 #### [spacevim](https://spacevim.org/) exists and works in termux and nhterm
 
 ## apyide
-[![Build Status](http://build.eberlein.io:8080/job/android_apyide/badge/icon)](http://build.eberlein.io:8080/job/android_apyide/)
+[![Build Status](https://build.eberlein.io/buildStatus/icon?job=android_apyide)](https://build.eberlein.io/job/android_apyide/)
 
 ### why?
 other python ide's are not for free.<br>
